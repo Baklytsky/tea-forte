@@ -1,0 +1,51 @@
+import { html, css } from 'lit'
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import './../focus-trap.js'
+
+<Meta title="Focus Trap" />
+
+# Focus Trap
+
+Here we have a wrapper component that automatically traps focus when enabled.
+
+Usage:
+
+```html
+<hh-focus-trap active="false || true">
+  <div>
+    <button>Button One</button>
+    <button>Button Two</button>
+    <button>Button Three</button>
+  </div>
+</hh-focus-trap>
+```
+
+### Simple Usage:
+
+<Canvas>
+  <Story name="Default">
+    {() =>
+      html`<button
+          id="trigger"
+          style="display: inline-block; margin-bottom: 10px"
+        >
+          Trap Focus</button
+        ><hh-focus-trap active="false"
+          ><div
+            style="padding: 1em; background: #eee; width: 80%; height: 500px;"
+          >
+            <h1 tabindex="0">Not Trapped</h1>
+            <button>Button One</button>
+            <button>Button Two</button>
+            <button>Button Three</button>
+          </div></hh-focus-trap
+        >
+        <script>
+          document.getElementById('trigger').addEventListener('click', (e) => {
+            document.querySelector('hh-focus-trap').setAttribute('active', true)
+            document.querySelector('hh-focus-trap h1').innerHTML = 'Trapped!'
+          })
+        </script>`
+    }
+  </Story>
+</Canvas>

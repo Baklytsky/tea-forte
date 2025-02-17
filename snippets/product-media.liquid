@@ -1,0 +1,43 @@
+{%- render '3d-elements', render: 'dependencies', media: product.media %}
+
+<a class="visually-hidden" href="#ProductInfo-{{ section.id }}">
+  {{ "accessibility.skip_to_product_info" | t }}
+</a>
+
+<hh-slider breakpoint="767" class="gf gf--peak gf2--md gf2--lg" role="list" active="true">
+  {%- if product.selected_or_first_available_variant.featured_media != null -%}
+    {%- assign media = product.selected_or_first_available_variant.featured_media -%}
+    <div role="listitem" slot="item" class="gfi mb1 w1">
+      {% render 'product-thumbnail', 
+        media: media, 
+        position: forloop.index, 
+        loop: section.settings.enable_video_looping, 
+        modal_id: section.id 
+      %}
+    </div>
+  {%- endif -%}
+  {%- for media in product.media -%}
+    {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+    <div role="listitem" slot="item" class="gfi mb1 {% if media.media_type != 'image' or forloop.index == 1 %} w1--important{% endif %}">
+      {% render 'product-thumbnail', 
+        media: media, 
+        position: forloop.index, 
+        loop: section.settings.enable_video_looping, 
+        modal_id: section.id 
+      %}
+    </div>
+    {%- endunless -%}
+  {%- endfor -%}
+</hh-slider>
+
+<hh-modal id="{{ section.id }}" open="false" ctx="product">
+  {%- for media in product.media -%}
+    {%- if media.media_type == 'image' -%}
+      {%- render 'image', image: media.preview_image, id: media.id -%}
+    {%- else -%}
+      {%- render 'product-thumbnail', ctx: 'modal', media: media, position: forloop.index -%}
+    {%- endif -%}
+  {%- endfor -%}
+</hh-modal>
+
+{%- render '3d-elements', render: 'augmented-reality-button', media: product.media %}

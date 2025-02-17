@@ -1,0 +1,125 @@
+{% render 'async-stylesheet', url: 'snippet-filter.css' %}
+
+<script src="{{ 'component-price-range.js' | asset_url }}" defer="defer" type="module"></script>
+
+{% case filter.type %}
+  {% when 'list' %}
+  <details class="filter relative js-filter{% if ctx %} filter--{{ ctx }}{% endif %}" data-index="{{ index }}">
+    <summary class="filter__summary">
+      <div class="flex">
+        <span>{{ filter.label | escape }}</span>
+        <span class="filter__count-bubble js-bubble">{%- if filter.active_values.size > 0 -%}{{ filter.active_values.size }}{%- endif -%}</span>
+        {% render 'icon' with 'caret' %}
+      </div>
+    </summary>
+    <div class="filter__display {% if ctx %} filter__display--{{ ctx }}{% endif %}">
+      <div class="filter__header">
+        <span class="filter__selected js-selected no-js-hidden">{{ 'sections.collection_template.filters_selected' | t: count: filter.active_values.size }}</span>
+        <a href="{{ filter.url_to_remove }}" class="mx0 underline js-facet-remove" >{{ 'sections.collection_template.reset' | t }}</a>
+      </div>
+      <ul class="filter__list" role="list">
+        {%- for value in filter.values -%}
+          <li class="list-menu__item filter__item">
+            <label for="Filter-{{ ctx }}-{{ filter.label | escape }}-{{ forloop.index }}" class="filter__checkbox{% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}">
+              <input type="checkbox"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                id="Filter-{{ ctx }}-{{ filter.label | escape }}-{{ forloop.index }}"
+                {% if value.active %}checked{% endif %}
+                {% if value.count == 0 and value.active == false %}disabled{% endif %}
+              >
+
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1"></rect>
+              </svg>
+
+              <svg class="icon icon-checkmark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 9" fill="none" width="10px" height="10px">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.35.643a.5.5 0 01.006.707l-6.77 6.886a.5.5 0 01-.719-.006L.638 4.845a.5.5 0 11.724-.69l2.872 3.011 6.41-6.517a.5.5 0 01.707-.006h-.001z" fill="currentColor"/>
+              </svg>
+              {{ value.label | escape }} ({{ value.count }})
+            </label>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </details>
+  {% when 'price_range' %}
+  {%- if settings.show_price_range -%}
+  {% liquid
+    assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+    assign uses_comma_decimals = false
+    if currencies_using_comma_decimals contains cart.currency.iso_code
+      assign uses_comma_decimals = true
+    endif
+  %}
+  <details class="filter relative js-filter filter--price-range{% if ctx %} filter--{{ ctx }}{% endif %}" data-index="{{ index }}">
+    <summary class="filter__summary">
+      <div class="flex">
+        <span>{{ filter.label | escape }}</span>
+        <span class="filter__count-bubble js-bubble{%- if filter.min_value.value or filter.max_value.value -%}{{ filter.active_values.size }} count-bubble--dot{% endif %}"></span>
+        {% render 'icon' with 'caret' %}
+      </div>
+    </summary>
+    <div class="filter__display{% if ctx %} filter__display--{{ ctx }}{% endif %}">
+      <div class="filter__header">
+        {%- assign max_price_amount = filter.range_max | money | escape -%}
+        <span class="filter__selected">{{ "sections.collection_template.max_price" | t: price: max_price_amount }}</span>
+        <a href="{{ filter.url_to_remove }}" class="mx0 underline js-facet-remove" >{{ 'sections.collection_template.reset' | t }}</a>
+      </div>
+      <hh-price-range class="filter__list--price">
+        <hh-input-wrapper class="w1 mr1">
+          <span>{{ cart.currency.symbol }}</span>
+          {%- assign label = 'sections.collection_template.from' | t -%}
+          {%- capture id -%}Filter-{{ ctx }}-{{ filter.label | escape }}-GTE{%- endcapture -%}
+          {%- capture max -%}{{ filter.range_max | money_without_currency | replace: ',', '' }}{%- endcapture -%}
+          {%- liquid 
+            capture value 
+              if filter.min_value.value
+                if uses_comma_decimals
+                  echo filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                else 
+                  echo filter.min_value.value | money_without_currency | replace: ',', ''
+                endif
+              endif
+            endcapture
+          -%}
+          {%- render 'input',
+            type: 'number',
+            id: id,
+            name: filter.min_value.param_name,
+            min: 0,
+            max: max,
+            label: label,
+            value: value
+          -%}
+        </hh-input-wrapper>
+        <hh-input-wrapper class="w1">
+          <span>{{ cart.currency.symbol }}</span>
+          {%- assign label = 'sections.collection_template.to' | t -%}
+          {%- capture id -%}Filter-{{ ctx }}-{{ filter.label | escape }}-LTE{%- endcapture -%}
+          {%- capture max -%}{{ filter.range_max | money_without_currency | replace: ',', '' }}{%- endcapture -%}
+          {%- liquid 
+            capture value 
+              if filter.max_value.value
+                if uses_comma_decimals
+                  echo filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                else 
+                  echo filter.max_value.value | money_without_currency | replace: ',', ''
+                endif
+              endif
+            endcapture
+          -%}
+          {%- render 'input',
+            type: 'number',
+            id: id,
+            name: filter.max_value.param_name,
+            min: 0,
+            max: max,
+            label: label,
+            value: value
+          -%}
+        </hh-input-wrapper>
+    </hh-price-range>
+  </details>
+  {%- endif -%}
+{% endcase %}

@@ -1,0 +1,21 @@
+{% style %}
+@font-face {
+  font-family: 'Gotham Light';
+  src: url('{{ 'font-gotham-light-regular.woff2' | asset_url }}') format('woff2'),
+       url('{{ 'font-gotham-light-regular.woff' | asset_url }}') format('woff');
+  font-weight:  100;
+  font-style:   normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Medium';
+  src: url('{{ 'font-gotham-medium-regular.woff2' | asset_url }}') format('woff2'),
+       url('{{ 'font-gotham-medium-regular.woff' | asset_url }}') format('woff');
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+{% endstyle %}

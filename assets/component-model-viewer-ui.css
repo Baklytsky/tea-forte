@@ -1,0 +1,43 @@
+.shopify-model-viewer-ui .shopify-model-viewer-ui__controls-area {
+  background: var(--hh-color-background);
+  border-color: var(--hh-color-light);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button {
+  color: var(--hh-color-neutral);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control:hover {
+  color: var(--hh-color-neutral);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control:active,
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control.focus-visible:focus {
+  color: var(--hh-color-neutral);
+  background: var(--hh-color-light);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control:not(:last-child):after {
+  border-color: var(--hh-color-light);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster {
+  border-radius: 50%;
+  color: var(--hh-color-foreground);
+  background: var(--hh-color-background);
+  border-color: var(--hh-color-light);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--hh-duration-short) ease, color var(--hh-duration-short) ease;
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__poster-control-icon {
+  width: 4.8rem;
+  height: 4.8rem;
+  margin-top: .3rem;
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster:hover,
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster:focus {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+

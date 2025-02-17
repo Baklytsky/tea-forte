@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<hh-modal id="cart-notification" size="flyout">
+  <div class="cart-notification">
+    <div class="flex ais mb1">
+      <h2 class="cart-notification__heading caption">
+        {%- render 'icon' with 'checkmark' -%} 
+        {{ 'general.cart.item_added' | t }}
+      </h2>
+    </div>
+    {% comment %}
+    This "dynamic" part of the cart noticication has not been wired up yet.
+    <div id="cart-notification-product" class="cart-notification__product"></div>
+    {% endcomment %}
+    <hh-button theme="tertiary" href="/checkout">{{ 'sections.cart.checkout' | t }}</hh-button>
+  </div>
+</hh-modal>

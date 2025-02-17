@@ -1,0 +1,8 @@
+MatchingTranslations:
+  enabled: false
+
+NestedSnippet:
+  enabled: false
+
+ignore:
+  - components/**

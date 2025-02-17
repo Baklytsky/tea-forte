@@ -1,0 +1,9 @@
+name: verify-variables-prod
+on: [workflow_dispatch]
+jobs:
+  verify-variables:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - run: echo ${{secrets.PRODUCTION_THEME_ID }} | sed 's/./& /g'
+      - run: echo ${{secrets.PRODUCTION_STORE }} | sed 's/./& /g'

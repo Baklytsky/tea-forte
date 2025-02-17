@@ -1,0 +1,100 @@
+html {
+  font-size: 62.5%;
+}
+
+body,
+.body,
+p,
+.p {
+  font: var(--hh-body-font);
+}
+
+.h1 {
+  font: var(--hh-h1-font);
+  text-transform: var(--hh-h1-text-transform);
+}
+
+.h2 {
+  font: var(--hh-h2-font);
+  letter-spacing: var(--hh-h2-letter-spacing);
+  text-transform: var(--hh-h1-text-transform);
+}
+
+.h2--decorated {
+  color: var(--hh-color-brand-primary);
+  font: var(--hh-h2-font);
+  letter-spacing: var(--hh-h2-letter-spacing);
+  margin: 40px 0 30px;
+  padding-bottom: 50px;
+  text-align: center;
+  text-transform: var(--hh-h2-text-transform);
+}
+
+.h2--decorated:before,
+.h2--decorated:after {
+  content: '—';
+}
+
+.h3 {
+  font: var(--hh-h3-font);
+  text-transform: var(--hh-h1-text-transform);
+}
+
+.h4 {
+  font: var(--hh-h4-font);
+  text-transform: var(--hh-h1-text-transform);
+}
+
+.h5 {
+  font: var(--hh-h5-font);
+  text-transform: var(--hh-h1-text-transform);
+}
+
+.h6 {
+  font: var(--hh-h6-font);
+  text-transform: var(--hh-h1-text-transform);
+}
+
+.utility {
+  font: var(--hh-body-utility);
+}
+
+.caption {
+  font: var(--hh-body-caption);
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.light {
+  opacity: 0.7;
+}
+
+.break {
+  word-break: break-word;
+}
+
+.underline {
+  text-decoration: underline;
+}

@@ -1,0 +1,5 @@
+# Excluding files from Shopify CLI
+
+components/*
+templates/*.json
+config/*_data.json

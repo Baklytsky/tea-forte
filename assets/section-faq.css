@@ -1,0 +1,18 @@
+.faq-item {
+  margin-bottom: 2rem;
+}
+
+.faq-question {
+  align-items: center;
+  display: flex;
+}
+
+.faq-question__question {
+  flex: 1;
+  margin: 0;
+}
+
+.faq-question__question + .icon-plus {
+  height: 1.4rem;
+  width: 1.4rem;
+}

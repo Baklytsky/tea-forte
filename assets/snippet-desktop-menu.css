@@ -1,0 +1,40 @@
+.desktop-menu {
+  display: none;
+  align-items: center;
+  grid-area: navigation;
+  gap: 3rem;
+  padding: 20px 0;
+  justify-content: center;
+  border-top: 1px solid var(--hh-color-grey-2);
+  border-bottom: 1px solid var(--hh-color-grey-2);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.desktop-menu li {
+  list-style: none;
+}
+
+.desktop-menu .header__menu-item {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--hh-color-brand-secondary);
+  font-weight: 600;
+  padding: 0;
+}
+
+.desktop-menu .header__menu-item--grandchild {
+  font-weight: 300;
+}
+
+@media (min-width: 750px) {
+  .desktop-menu {
+    display: flex;
+  }
+}

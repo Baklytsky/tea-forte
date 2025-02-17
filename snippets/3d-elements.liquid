@@ -1,0 +1,56 @@
+{% assign is_applicable = media | where: "media_type", "model" | first %}
+
+{%- if is_applicable -%}
+  {%- if render == 'dependencies' -%}
+    <link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
+    <script src="{{ 'component-product-model.js' | asset_url }}" type="module" defer></script>
+    <script type="application/json" id="ProductJSON-{{ product.id }}">
+      {{ product.media | where: 'media_type', 'model' | json }}
+    </script>
+  {%- elsif render == 'augmented-reality-button' -%}
+    <hh-button-wrapper theme="secondary" width="full">
+      <button
+        type="button"
+        aria-label="{{ 'products.product.xr_button_label' | t }}"
+        data-shopify-xr
+        data-shopify-model3d-id="{{ has_3d_model.id }}"
+        data-shopify-title="{{ product.title | escape }}"
+        data-shopify-xr-hidden
+      >
+        {% render 'icon' with '3d-model' %}
+        {{ 'products.product.xr_button' | t }}
+      </button>
+    </hh-button-wrapper>
+  {%- elsif render == 'deferred-model' -%}
+    <product-model class="thumbnail__deferred-media media hidden--sm overflow-hidden no-js-hidden" style="padding-top: 100%" data-media-id="{{ media.id }}">
+      <button class="thumbnail__deferred-poster" type="button" id="Deferred-Poster-Modal-{{ media.id }}">
+        <span class="thumbnail__deferred-poster-button motion-reduce">
+          <span class="visually-hidden">{{ 'products.product.media.play_model' | t }}</span>
+            {%- render 'icon' with '3d-model' -%}
+          </span>
+        </span>
+        {%- render 'image', 
+          image: item.preview_image,
+          sizes: '(min-width: 1200px) 75vw, (min-width: 750px) 50vw, 1000vw'
+        -%}
+      </button>
+      <template>
+        {{ item | media_tag: image_size: "2048x", toggleable: true }}
+      </template>
+    </product-model>
+    <hh-button-wrapper theme="secondary" width="full">
+      <button
+        type="button"
+        aria-label="{{ 'products.product.xr_button_label' | t }}"
+        data-shopify-xr
+        data-shopify-model3d-id="{{ media.id }}"
+        data-shopify-title="title"
+        data-shopify-xr-hidden
+        >
+        {% render 'icon' with '3d-model' %}
+        {{ 'products.product.xr_button' | t }}
+      </button>
+    </hh-button-wrapper>
+  {%- endif -%}
+{% endif %}

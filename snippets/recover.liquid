@@ -1,0 +1,36 @@
+<div id="RecoverPasswordForm" style="display:none;">
+<a href="/" class="header__heading-link"><img src="//cdn.shopify.com/s/files/1/0634/2983/7048/files/logo-min.png?v=1671043449" alt="Tea Forte Wholesale"></a>
+<h1 id="recover" tabindex="-1" class="h4 mt2">{{ 'customer.recover_password.title' | t }}</h1>
+<p class="p">{{ 'customer.recover_password.subtext' | t }}</p>
+
+{%- form 'recover_customer_password' -%}
+  {%- assign recover_success = form.posted_successfully? -%}
+  {%- assign label = 'customer.login_page.email' | t -%}
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'newsletter.label' | t -%}
+    {%- render 'input',
+      type: 'email',
+      id: 'RecoverEmail',
+      name: 'email',
+      label: label,
+      required: true
+    -%}
+  </hh-input-wrapper>
+
+  <hh-button-wrapper theme="primary">
+    <button type="submit">
+    Reset Password
+    </button>
+  </hh-button>
+{%- endform -%}
+
+{%- if recover_success == true -%}
+    <h3 class="form__message" tabindex="-1" autofocus>
+      {% render 'icon' with 'success' %}
+      {{ 'customer.recover_password.success' | t }}
+    </h3>
+  {%- endif -%}
+
+  <a class="account--link" href="#" onclick="hideRecoverPasswordForm();return false;">Return to login page</a>
+
+</div>

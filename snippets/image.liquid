@@ -1,0 +1,22 @@
+{% if container %}
+<div class="{{ classes }} img relative" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 }}%;">
+{% endif %}
+{%- assign default_height = image.width | divided_by: image.aspect_ratio -%}
+<img {% if id %}id="{{id}}"{% endif %} srcset="{%- if image.width >= 375 -%}{{ image | image_url: width: 375 }} 375w,{%- endif -%}
+  {%- if image.width >= 750 -%}{{ image | image_url: width: 750 }} 750w,{%- endif -%}
+  {%- if image.width >= 1100 -%}{{ image | image_url: width: 1100 }} 1100w,{%- endif -%}
+  {%- if image.width >= 1500 -%}{{ image | image_url: width: 1500 }} 1500w,{%- endif -%}
+  {%- if image.width >= 1780 -%}{{ image | image_url: width: 1780 }} 1780w,{%- endif -%}
+  {%- if image.width >= 2000 -%}{{ image | image_url: width: 2000 }} 2000w,{%- endif -%}
+  {%- if image.width >= 2800 -%}{{ image | image_url: width: 2800 }} 2800w{%- endif -%}"
+  sizes="{{ sizes }}"
+  src="{{ image | image_url: width: 750 }}"
+  loading="lazy"
+  alt="{{ image.alt | escape }}"
+  width="{{ image.width }}"
+  height="{{ height | default: default_height }}"
+  {% if class != blank %}class="{{ class }}"{% endif %}
+>
+{% if container %}
+</div>
+{% endif %}

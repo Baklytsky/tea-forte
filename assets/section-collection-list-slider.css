@@ -1,0 +1,221 @@
+.collection-list-wrapper hh-slider {
+  --hh-background: transparent;
+  overflow: visible;
+}
+
+@media screen and (max-width: 749px) {
+  .collage-section + .collection-list-section .no-heading.no-mobile-link {
+    margin-top: -7rem;
+  }
+  .collage-section + .collection-list-section .no-heading:not(.no-mobile-link) {
+    margin-top: -1rem;
+  }
+}
+
+@media screen and (min-width: 749px) {
+  .collage-section + .collection-list-section .no-heading {
+    margin-top: -4rem;
+  }
+}
+
+.collection-list-title {
+  margin: 0;
+  padding-top: 25px;
+}
+
+@media screen and (max-width: 749px) {
+  .collection-list-wrapper.container {
+    padding: 0;
+  }
+
+  .collection-list:not(.slider) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .collection-list-section .collection-list:not(.slider) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .collection-list-wrapper:not(.no-heading) .title-wrapper-with-link {
+    margin-top: -1rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .collection-list-wrapper.no-heading {
+    margin-top: 6rem;
+  }
+}
+
+.collection-list__item:only-child {
+  max-width: 100%;
+  width: 100%;
+}
+
+.collection-list__item .card--light-border:hover {
+  border: 0.1rem solid var(--hh-color-light);
+}
+
+.collection-list__item:only-child .media {
+  height: 35rem;
+}
+
+@media screen and (max-width: 749px) {
+  .collection-list .collection-list__item {
+    width: calc(100% - 3rem);
+  }
+
+  .slider.collection-list--1-items {
+    padding-bottom: 0;
+  }
+}
+
+.collection-list.negative-margin--small {
+  margin-bottom: -1rem;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .slider.collection-list--1-items,
+  .slider.collection-list--2-items,
+  .slider.collection-list--3-items,
+  .slider.collection-list--4-items {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .collection-list__item:only-child > *:not(.card--media) {
+    height: 320px;
+  }
+
+  .collection-list__item:only-child .media {
+    height: 47rem;
+  }
+
+  .collection-list__item a:hover {
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .collection-list.slider .collection-list__item {
+    max-width: 100%;
+  }
+  .collection-list-wrapper .card .image--wrapper .media {
+    margin: 0 auto;
+  }
+}
+
+.collection-list__item .card__text,
+.collection-list__item .card-colored {
+  position: relative;
+}
+
+.collection-list-wrapper .gf1 .gfi {
+  max-width: 25%;
+  width: 25%;
+}
+.collection-list {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.card--media .card__text-spacing {
+  padding: 1rem !important;
+  background: var(--hh-color-brand-secondary);
+}
+
+.collection-list-wrapper h3 {
+  text-align: center;
+  font-size: 14px;
+  color: var(--hh-color-day);
+  font-weight: 100;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.collection-list-wrapper .card .icon-wrap {
+  display: none;
+}
+
+.collection-list__carousel-wrapper {
+  border-bottom: solid 1px var(--hh-color-brand-primary);
+  border-top: solid 1px var(--hh-color-brand-primary);
+  width: 100%;
+}
+
+.collection-list__carousel {
+  --hh-height: 300px;
+  --hh-width: 65%;
+  display: block;
+  width: 90%;
+  margin: auto;
+}
+
+.collection-list__carousel__card-list {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.collection-list-wrapper .media > img:not(.zoom) {
+  position: initial;
+}
+
+.previous,
+.next {
+  color: var(--hh-color-brand-primary);
+  height: 25px;
+  width: 25px;
+  border: 1px solid var(--hh-color-brand-primary);
+  background: var(--hh-color-day);
+}
+@media screen and (max-width: 425px) {
+  .collection-list-title {
+    margin: 0;
+    padding-top: 0;
+  }
+}
+
+.collection-list-wrapper {
+  padding: 0;
+}
+
+.image--wrapper {
+  height: 189px;
+  display: flex;
+}
+
+.image--wrapper .media > img:not(.zoom) {
+  object-fit: contain;
+}
+
+.image--wrapper img {
+  background: #fff;
+}
+
+.card--media .card__text-spacing {
+  background: var(--hh-color-brand-secondary);
+  height: 50px;
+  padding: 0 10px !important;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-list__carousel__card-item {
+  margin-right: 10px;
+  height: 261px;
+  border: 0.1rem solid var(--hh-color-light);
+  align-items: center;
+  display: flex;
+}
+
+.collection-list-wrapper div[slot='item'] {
+  z-index: 1;
+}

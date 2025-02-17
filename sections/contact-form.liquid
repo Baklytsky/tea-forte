@@ -1,0 +1,98 @@
+<div class="container container--narrow">
+  <h2 class="h4">{{ section.settings.heading | escape }}</h2>
+  {%- form 'contact', id: 'ContactForm' -%}
+    {%- if form.posted_successfully? -%}
+      <div class="mb1 bg-light px1 rounded flex aic" tabindex="-1" autofocus>
+        <span style="width: 20px" class="mr05">{% render 'icon' with 'success' %}</span>
+        {{ 'templates.contact.form.post_success' | t }}
+      </div>
+    {%- elsif form.errors -%}
+      <div class="mb1 bg-light px1 rounded">
+        <h2 class="flex utility aic" tabindex="-1" autofocus>
+          <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
+          <span style="width: 20px" class="mr05">{% render 'icon' with 'error' %}</span>
+          {{ 'templates.contact.form.error_heading' | t }}
+        </h2>
+        {{ form.errors | default_errors }}
+      </div>
+    {%- endif -%}
+    <div class="g g2">
+      <hh-input-wrapper class="mb1">
+        {%- assign label = 'templates.contact.form.name' | t -%}
+        {%- capture name -%}"contact[{{ 'templates.contact.form.name' | t }}]{%- endcapture -%}
+        {%- render 'input',
+          type: 'text',
+          id: 'ContactForm-name',
+          name: name,
+          label: label,
+          autocomplete: 'name',
+          required: true,
+          value: customer.name
+        -%}
+      </hh-input-wrapper>
+      <hh-input-wrapper class="mb1">
+        {%- assign label = 'templates.contact.form.email' | t -%}
+        {%- render 'input',
+          type: 'email',
+          id: 'ContactForm-email',
+          name: 'contact[email]',
+          label: label,
+          required: true,
+          value: customer.email
+        -%}
+      </hh-input-wrapper>
+    </div>
+    <hh-input-wrapper class="mb1">
+      {%- assign label = 'templates.contact.form.phone' | t -%}
+      {%- capture name -%}contact[{{ 'templates.contact.form.phone' | t }}]{%- endcapture -%}
+      {%- render 'input',
+        type: 'tel',
+        id: 'ContactForm-phone',
+        name: name,
+        label: label,
+        required: true,
+        value: form.phone
+      -%}
+    </hh-input-wrapper>
+    <hh-input-wrapper class="mb1" height="multiline" animation="disappear">
+      {%- assign label = 'templates.contact.form.comment' | t -%}
+      {%- capture name -%}contact[{{ 'templates.contact.form.comment' | t }}]{%- endcapture -%}
+      {%- render 'input',
+        type: 'textarea',
+        id: 'ContactForm-body',
+        name: name
+        label: label,
+        required: true,
+        value: form.body
+      -%}
+    </hh-input-wrapper>
+    <div>
+      <hh-button-wrapper theme="primary">
+        <button type="submit">
+          {{ 'templates.contact.form.send' | t }}
+        </button>
+      </hh-button>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name"
+    }
+  ]
+}
+{% endschema %}

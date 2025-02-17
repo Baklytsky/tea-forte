@@ -1,0 +1,227 @@
+{% comment %}
+  * logo is fixed in the middle. If a logo isn't uploaded, it will use the shop name
+  * left of the logo is a menu you can choose in the settings
+  * right of the logo are utility links (search/accounts/cart)
+  * for the desktop menu, there is an option to choose 1 featured product
+{% endcomment %}
+
+{% liquid
+  render 'async-stylesheet', url: 'section-header.css'
+  render 'async-stylesheet', url: 'component-cart-notification.css'
+
+  assign header_menu = nil
+  assign customer_type = customer.metafields.custom.type | handleize
+  case customer_type
+    when 'retail'
+      assign header_menu = section.settings.menu_retail
+    when 'on-premise'
+      assign header_menu = section.settings.menu_op
+  endcase
+%}
+
+<script src="{{ 'component-header.js' | asset_url }}" type="module"></script>
+<script src="{{ 'component-details-modal.js' | asset_url }}" type="module"></script>
+<script src="{{ 'component-sticky-header.js' | asset_url }}" type="module"></script>
+
+<{% if section.settings.enable_sticky_header %}hh-sticky-header{% else %}div{% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  {% comment %}Announcement HTML gets injected through this merge tag below. Uncomment the following line to enable it:
+  <!-- %%announcement%% -->
+  {% endcomment %}
+
+  <hh-header class="bg-background">
+    <header class="header container{% if header_menu != blank %} header--has-menu{% endif %}">
+      <div class="header__overlay js-header-overlay hidden--md hidden--sm"> </div>
+
+      {%- liquid
+        if header_menu != blank
+          render 'mobile-menu', mod_menu: header_menu
+          render 'desktop-menu', mod_menu: header_menu
+        endif
+      -%}
+
+      {%- if request.page_type == 'index' -%}
+        <h1 class="header__heading">
+      {%- endif -%}
+          <a href="{{ routes.root_url }}" class="header__heading-link">
+            {%- if section.settings.logo != blank -%}
+              <img
+                src="{{ section.settings.logo | image_url: width: image_size }}"
+                loading="lazy"
+                class="header__heading-logo"
+                width="{{ section.settings.logo.width }}"
+                height="{{ section.settings.logo.height }}"
+                alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+              >
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif -%}
+
+      <!-- Site search (desktop) -->
+      <div class="header__search header__search--desktop container hidden--sm hidden--md">
+        <form action="{{ routes.search_url }}" method="get" role="search">
+          <hh-input-wrapper class="header__search__bar" animation="disappear" icon="left" height="compact">
+            {%- assign label = 'general.search.search' | t -%}
+            {%- assign value = search.terms | escape -%}
+            {%- render 'input',
+              id: 'site-search--mobile',
+              label: label,
+              type: 'search',
+              name: 'q',
+              value: value
+            -%}
+          </hh-input-wrapper>
+          <input type="hidden" name="options[prefix]" value="last">
+          <button class="visually-hidden">
+            {{ 'general.search.search' | t }}
+          </button>
+        </form>
+      </div>
+
+      <!-- Utility actions -->
+      <div class="header__utility">
+        <div class="flex">
+          {%- if shop.customer_accounts_enabled -%}
+            {% if customer %}
+              <hh-button theme="secondary" href="{{ routes.account_logout_url }}" class="header__utility__link hidden--sm hidden-md" width="full">
+                {{ 'customer.log_out' | t }}
+              </hh-button>
+              <hh-button theme="primary" href="{{ routes.account_url }}" class="header__utility__link hidden--sm hidden--md" width="full">
+                {{ 'customer.account_fallback' | t }}
+              </hh-button>
+            {% else %}
+              <hh-button theme="secondary" href="{{ routes.account_login_url }}" class="header__utility__link hidden--sm hidden--md" width="full">
+                {{ 'customer.log_in' | t }}
+              </hh-button>
+            {% endif %}
+          {%- endif -%}
+          {% comment %} To re-enable standard mini-cart, add this attribute to the below button: custom:click="toggleCart" {% endcomment %}
+          <hh-button theme="tertiary" underline="false" href="/cart" data-rerender data-spark-link="cart">
+            <span>
+              {% render 'icon' with 'cart' %} {%- if cart != empty -%}({{ cart.item_count }}){%- endif -%}
+            </span>
+            <span class="visually-hidden">{{ "cart.general.title" | t }}</span>
+          </hh-button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Site search (mobile) -->
+    <div class="header__search header__search--mobile container hidden--lg">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <hh-input-wrapper class="header__search__bar" animation="disappear" icon="left" height="compact">
+          {%- assign label = 'general.search.search' | t -%}
+          {%- assign value = search.terms | escape -%}
+          {%- render 'input',
+            id: 'site-search--mobile',
+            label: label,
+            type: 'search',
+            name: 'q',
+            value: value
+          -%}
+        </hh-input-wrapper>
+        <input type="hidden" name="options[prefix]" value="last">
+        <button class="visually-hidden">
+          {{ 'general.search.search' | t }}
+        </button>
+      </form>
+    </div>
+  </hh-header>
+</{% if section.settings.enable_sticky_header %}hh-sticky-header{% else %}div{% endif %}>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | image_url: width: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__menu.content"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_retail",
+      "label": "t:sections.header.settings.menu_retail.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_op",
+      "label": "t:sections.header.settings.menu_op.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__logo.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__additional.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "default": true,
+      "label": "t:sections.header.settings.enable_sticky_header.label",
+      "info": "t:sections.header.settings.enable_sticky_header.info"
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "t:sections.header.settings.featured_product.label",
+      "info": "t:sections.header.settings.featured_product.info"
+    }
+  ]
+}
+{% endschema %}

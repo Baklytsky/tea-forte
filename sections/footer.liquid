@@ -1,0 +1,142 @@
+{%- liquid
+  render 'async-stylesheet', url: 'section-footer.css'
+  render 'async-stylesheet', url: 'snippet-newsletter-form.css'
+-%}
+
+<footer class="footer">
+  <div class="bg-white">
+    <div class="footer__container container c-tf-teal">
+      <div class="footer__body">
+        {%- if section.settings.enable_newsletter -%}
+          <div class="footer__newsletter">
+            {%- if section.settings.newsletter_heading != blank -%}
+              <h2 class="h4 mv0">{{ section.settings.newsletter_heading | escape }}</h2>
+            {%- endif -%}
+            {%- if section.settings.newsletter_caption != blank -%}
+              <p class="p">{{ section.settings.newsletter_caption | escape }}</h2>
+            {%- endif -%}
+            {%- render 'newsletter-form' -%}
+          </div>
+        {%- endif -%}
+        {%- if section.blocks.size > 0 -%}
+        <div class="footer__blocks flex">
+          {%- for block in section.blocks -%}
+            <div class="footer__block">
+              <h3 class="h6 mt0">{{ block.settings.heading }}</h3>
+              <ul>
+              {%- for link in block.settings.menu.links -%}
+                <li class="footer__menu-link">
+                  <a class="c-inherit" href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+              </ul>
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_social -%}
+      <div class="footer__social-links">
+        {%- assign platforms = 'twitter, facebook, instagram' | split: ', ' -%}
+        <ul class="flex" role="list">
+          {%- for platform in platforms -%}
+            {%- assign setting = 'social_' | append: platform | append: '_link' -%}
+            {%- assign locale = 'general.social.links.' | append: platform -%}
+            {%- if settings[setting] != blank -%}
+              <li class="footer__social-icon">
+                <a href="{{ settings[setting] }}" class="" aria-describedby="a11y-external-message">
+                  <span class="c-day">{%- render 'icon' with platform -%}</span>
+                  <span class="visually-hidden">{{ locale | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="footer__i18n flex container jcb">
+    {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+      {% render 'i18n-select', type: 'currency' %}
+    {%- endif -%}
+    {%- if section.settings.enable_language_selector -%}{% comment %}and localization.available_languages.size > 1{% endcomment %}
+      {% render 'i18n-select', type: 'language' %}
+    {%- endif -%}
+  </div>
+
+  <div class="footer__signoff container pv2 center">
+    <small class="caption">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Quick links",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+          "info": "t:sections.footer.blocks.link_list.settings.heading.info"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "default": false,
+      "label": "t:sections.footer.settings.enable_newsletter.label"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "default": "Let's keep in touch!",
+      "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_caption",
+      "default": "Get glowing with our latest products and exclusive events.",
+      "label": "t:sections.footer.settings.newsletter_caption.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": false,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_country_selector.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_language_selector.label"
+    }
+  ],
+  "default": {
+    "blocks": []
+  }
+}
+{% endschema %}

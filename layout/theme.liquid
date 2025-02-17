@@ -1,0 +1,164 @@
+<!doctype html>
+<html class='no-js' lang='{{ request.locale.iso_code }}'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <meta name='theme-color' content=''>
+    <link rel='canonical' href='{{ canonical_url }}'>
+
+    {% liquid
+      render 'preconnect'
+      render 'favicons'
+    %}
+
+    <title>{{ page_title }}</title>
+
+    {% if page_description %}
+      <meta name='description' content='{{ page_description | escape }}'>
+    {% endif %}
+
+    {% liquid
+      render 'meta-tags'
+      render 'seo-schema'
+      render 'css-variables'
+      render 'fonts'
+      echo content_for_header
+      echo '-base.min.css' | asset_url | stylesheet_tag
+      render 'component-scripts'
+    %}
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js')
+    </script>
+
+    {% render 'sparklayer-core' %}
+    {% render 'sparklayer-style' %}
+  </head>
+
+  {% liquid
+    assign body_template_class = 'template-' | append: template
+    if template.name == 'register'
+      assign body_template_class = body_template_class | append: ' customers--register'
+    endif
+    if customer.metafields.sparklayer.authentication
+      assign body_template_class = body_template_class | append: ' b2b'
+    endif
+  %}
+
+  <body class='{{ body_template_class }}'>
+    {% liquid
+      unless request.design_mode
+        render 'login-redirect'
+      endunless
+    %}
+
+    <a class='skip-to-content-link visually-hidden' href='#main'>
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+
+    {%- liquid
+      capture announcement
+        section 'announcement-bar'
+      endcapture
+
+      capture header
+        section 'header'
+      endcapture
+    -%}
+
+    {{ header | replace: '<!-- %%announcement%% -->', announcement }}
+
+    {%- liquid
+      if template != 'cart'
+        render 'cart-notification'
+        section 'mini-cart'
+      endif
+    -%}
+
+    <main
+      id='main'
+      class='content-for-layout focus-none'
+      role='main'
+      tabindex='-1'
+    >
+      {{ content_for_layout }}
+    </main>
+
+    {%- section 'footer' -%}
+
+    <ul hidden>
+      <li id='a11y-refresh-page-message'>
+        {{ 'accessibility.refresh_page' | t }}
+      </li>
+    </ul>
+
+    <script>
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+      }
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t }}`,
+      }
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+      }
+    </script>
+
+    <!-- klaviyo snippet -->
+    {% if product %}
+      <script>
+        window.addEventListener('load', function() {
+        var _learnq = window._learnq || [];
+        function addedToCart() {
+          fetch(`${window.location.origin}/cart.js`)
+          .then(res => res.clone().json().then(data => {
+            var cart = {
+              total_price: data.total_price/100,
+              $value: data.total_price/100,
+              total_discount: data.total_discount,
+              original_total_price: data.original_total_price/100,
+              items: data.items
+            }
+            if (item !== 'undefined') {
+              cart = Object.assign(cart, item)
+            }
+            if (klAjax) {
+                _learnq.push(['track', 'Added to Cart', cart]);
+                klAjax = false;
+              }
+          }))
+        };
+        (function (ns, fetch) {
+          ns.fetch = function() {
+            const response = fetch.apply(this, arguments);
+            response.then(res => {
+              if (`${window.location.origin}/cart/add.js`
+                .includes(res.url)) {
+                  addedToCart()
+              }
+            });
+            return response
+          }
+        }(window, window.fetch));
+        var klAjax = true;
+        var atcButtons = document.querySelectorAll("form[action*='/cart/add'] button[type='submit']");
+        for (var i = 0; i < atcButtons.length; i++) {
+            atcButtons[i].addEventListener("click", function() {
+              if (klAjax) {
+                _learnq.push(['track', 'Added to Cart', item]);
+                klAjax = false;
+              }
+            })
+        }
+        });
+      </script>
+    {% endif %}
+  </body>
+</html>

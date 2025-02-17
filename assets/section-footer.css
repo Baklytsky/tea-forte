@@ -1,0 +1,129 @@
+.footer__container {
+  padding-top: var(--hh-section-vertical-margin);
+  padding-bottom: var(--hh-section-vertical-margin);
+}
+
+.footer__body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__block + .footer__block {
+  margin-left: 7rem;
+}
+
+.footer__menu-link + .footer__menu-link {
+  margin-top: 2rem;
+}
+
+.footer__social-icon {
+  width: 2rem;
+}
+
+.footer__social-icon + .footer__social-icon {
+  margin-left: 3rem;
+}
+
+.shopify-challenge__container .shopify-challenge__message {
+  font-family: var(--hh-body-font);
+  font-size: 4.2rem;
+  line-height: 4.6rem;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: var(--hh-color-brand-secondary);
+}
+
+.shopify-challenge__button {
+  margin-top: 5.1rem !important;
+  padding: 1.2rem 9.8rem;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 3.2rem;
+  min-width: 1.94rem;
+  font-family: var(--hh-body-font);
+  font-size: 2.4rem;
+  text-align: center;
+  color: var(--hh-color-reverse);
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 0;
+  background-color: var(--hh-color-brand-primary);
+  border-color: var(--hh-color-brand-primary);
+  transition: all 300ms;
+}
+
+.shopify-challenge__button:hover {
+  background-color: var(--hh-color-gold);
+}
+
+@media screen and (max-width: 750px) {
+  .shopify-challenge__container .shopify-challenge__message {
+    margin-bottom: 10rem;
+  }
+
+  .shopify-challenge__button {
+    margin-top: 3.4rem !important;
+    padding: 0.3rem 9.8rem;
+    max-width: 36rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* TF Footer Style JDE USA */
+.footer .footer__body {
+}
+.footer .bg-white {
+  background-color: #fff;
+  background-image: url('https://cdn.shopify.com/s/files/1/0634/2983/7048/files/pyramid_140x_a4126477-ff56-46ca-8a3f-92bfd2edd5ca_430x.webp');
+  margin-top: 7rem;
+  border-top: 0.1rem solid #eee;
+}
+.footer .footer__blocks h3 {
+  font-weight: 400;
+  font-family: 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+  font-size: 1.8rem;
+}
+.footer .footer__container.container.c-tf-teal {
+  color: #455560;
+}
+.footer .footer__signoff {
+  background-color: #455560;
+  padding: 1rem 0.5rem;
+  max-width: 100%;
+}
+.footer .footer__signoff .caption,
+.footer .footer__signoff .caption a {
+  font-size: 1.4rem;
+  color: #fff;
+}
+.footer .footer__menu-link {
+  font-size: 1.6rem;
+  line-height: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.footer .footer__menu-link:last-of-type {
+  margin-bottom: 0;
+}
+.footer .footer__blocks.flex {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+@media screen and (min-width: 480px) {
+  .footer .footer__blocks.flex {
+    width: auto;
+    display: flex;
+    text-align: left;
+  }
+  .footer .footer__blocks::before {
+    content: '';
+    display: inline-block;
+    width: 16rem;
+    height: auto;
+    background-image: url('https://wholesale.teaforte.com/cdn/shop/files/logo-min-whols.png?v=1708454997');
+    background-size: 16rem auto;
+    background-repeat: no-repeat;
+    margin-right: 10rem;
+  }
+}

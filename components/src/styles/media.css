@@ -1,0 +1,52 @@
+.media {
+  display: block;
+  background-color: var(--hh-color-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.media--transparent {
+  background-color: transparent;
+}
+
+.media > img:not(.zoom) {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: center center;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.media--square {
+  padding-bottom: 100%;
+}
+
+.media--portrait {
+  padding-bottom: 125%;
+}
+
+.media--landscape {
+  padding-bottom: 66.6%;
+}
+
+.media--cropped {
+  padding-bottom: 56%;
+}
+
+.media--16-9 {
+  padding-bottom: 56.25%;
+}
+
+.media--circle {
+  padding-bottom: 100%;
+  border-radius: 50%;
+}
+
+.media.media--hover-effect > img + img {
+  opacity: 0;
+}

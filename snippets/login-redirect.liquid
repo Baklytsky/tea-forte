@@ -1,0 +1,24 @@
+{% assign customer_type = customer.metafields.custom.type | downcase | handleize %}
+
+<script>
+  const customer = '{{ customer }}'
+  const currentPageType = '{{ template.name }}'
+
+  if (customer) {
+    const pagesToRedirect = ['index', 'account', 'login']
+    const customerType = '{{ customer_type }}'
+    const currentPage = window.location.pathname.split('/').pop()
+    const landingPage = customerType || '{{ settings.default_landing_page }}'
+    if (pagesToRedirect.includes(currentPageType) && currentPage !== landingPage) {
+      window.location.href = `{{ shop.secure_url }}/pages/${landingPage}`
+    }
+  } else {
+    const pagesToExclude = ['login', 'challenge'] // redirecting on these pages will cause infinite loop
+    const pathsToExclude = ['account/activate', 'account/reset', '/challenge'] // redirecting on these pages will prevent essential account actions
+    const hasExcludedPath = !!pathsToExclude.filter(path => window.location.pathname.includes(path)).length
+    
+    if (!pagesToExclude.includes(currentPageType) && !hasExcludedPath) {
+      window.location.href = '{{ routes.account_login_url }}'
+    }
+  }
+</script>

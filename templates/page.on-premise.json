@@ -1,0 +1,298 @@
+{
+  "sections": {
+    "9b83df47-452c-44af-962a-e7473660d23d": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16650456563960__9b83df47-452c-44af-962a-e7473660d23d-1671649064e4cb1ca5-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "On Premise"
+          }
+        },
+        "template--16650456563960__9b83df47-452c-44af-962a-e7473660d23d-1671649064e4cb1ca5-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Thank you for being a Tea Forté On Premise customer.  Like you, we partner with those who share our dedication and determination to produce a definitive tea experience.<\/p>"
+          }
+        },
+        "template--16650456563960__9b83df47-452c-44af-962a-e7473660d23d-1671649064e4cb1ca5-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16650456563960__9b83df47-452c-44af-962a-e7473660d23d-1671649064e4cb1ca5-0",
+        "template--16650456563960__9b83df47-452c-44af-962a-e7473660d23d-1671649064e4cb1ca5-1",
+        "template--16650456563960__9b83df47-452c-44af-962a-e7473660d23d-1671649064e4cb1ca5-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/op_hero_1301x868_96.jpg",
+        "height": "adapt",
+        "heading_color": "primary",
+        "layout": "image_first"
+      }
+    },
+    "dce8cfcd-93c5-4c8e-b01a-46729cde0c02": {
+      "type": "collection-list-slider",
+      "blocks": {
+        "template--16651073782008__dce8cfcd-93c5-4c8e-b01a-46729cde0c02-167173421857b5a3a4-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gourmet-tea-pyramids-event-box"
+          }
+        },
+        "template--16651073782008__dce8cfcd-93c5-4c8e-b01a-46729cde0c02-167173421857b5a3a4-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gourmet-tea-pyramids-tea-over-ice-5pk"
+          }
+        },
+        "71508851-06a3-4704-b3cb-b8cc0e89807b": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hot-tea-teaware"
+          }
+        },
+        "b0498a0a-2a0d-4785-9787-54137ce31628": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gourmet-tea-loose-tea-one-pound-loose-tea-pouch"
+          }
+        }
+      },
+      "block_order": [
+        "template--16651073782008__dce8cfcd-93c5-4c8e-b01a-46729cde0c02-167173421857b5a3a4-1",
+        "template--16651073782008__dce8cfcd-93c5-4c8e-b01a-46729cde0c02-167173421857b5a3a4-2",
+        "71508851-06a3-4704-b3cb-b8cc0e89807b",
+        "b0498a0a-2a0d-4785-9787-54137ce31628"
+      ],
+      "settings": {
+        "title": "TOP CATEGORIES",
+        "image_ratio": "square",
+        "color_scheme": "background-1",
+        "swipe_on_mobile": false,
+        "image_padding": false,
+        "show_view_all": false
+      }
+    },
+    "main": {
+      "type": "main-landing",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "4c60be12-e39b-45d0-b679-0476558bb7ba": {
+      "type": "cta-image-banner",
+      "blocks": {
+        "template--16697727090936__4c60be12-e39b-45d0-b679-0476558bb7ba-168113018563b2e03a-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "FREE STANDARD SHIPPING"
+          }
+        },
+        "template--16697727090936__4c60be12-e39b-45d0-b679-0476558bb7ba-168113018563b2e03a-1": {
+          "type": "text",
+          "settings": {
+            "text": "For a limited time, receive free standard shipping on all On Premise orders."
+          }
+        },
+        "template--16697727090936__4c60be12-e39b-45d0-b679-0476558bb7ba-168113018563b2e03a-2": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16697727090936__4c60be12-e39b-45d0-b679-0476558bb7ba-168113018563b2e03a-0",
+        "template--16697727090936__4c60be12-e39b-45d0-b679-0476558bb7ba-168113018563b2e03a-1",
+        "template--16697727090936__4c60be12-e39b-45d0-b679-0476558bb7ba-168113018563b2e03a-2"
+      ],
+      "custom_css": [
+        ".banner__text {color: #fff;}",
+        ".banner__content.container h2 {font-size: min(max(5vw), 34px); letter-spacing: 0.05em;}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/free_shipping_banner_retail.jpg",
+        "desktop_text_box_position": "center",
+        "color_scheme": "background-1",
+        "stack_images_on_mobile": true,
+        "adapt_height_first_image": false
+      }
+    },
+    "a2d7d99c-4313-4998-822a-da7488851b59": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Bestsellers",
+        "collection": "bestsellers-on-premise",
+        "image_ratio": "adapt"
+      }
+    },
+    "b172a0f0-cf84-40d6-8fdf-a213395fa28f": {
+      "type": "collection-list",
+      "disabled": true,
+      "blocks": {
+        "template--16651073782008__b172a0f0-cf84-40d6-8fdf-a213395fa28f-167173421833ff921f-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-accessories-cafe-cup-and-lid"
+          }
+        },
+        "template--16651073782008__b172a0f0-cf84-40d6-8fdf-a213395fa28f-167173421833ff921f-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-gifts-chai-tea-gifts"
+          }
+        },
+        "template--16651073782008__b172a0f0-cf84-40d6-8fdf-a213395fa28f-167173421833ff921f-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "birthday-gifts"
+          }
+        },
+        "3f91b37a-40c9-4171-9324-e2dac05665a8": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-gifts-fleur-gifts"
+          }
+        }
+      },
+      "block_order": [
+        "template--16651073782008__b172a0f0-cf84-40d6-8fdf-a213395fa28f-167173421833ff921f-0",
+        "template--16651073782008__b172a0f0-cf84-40d6-8fdf-a213395fa28f-167173421833ff921f-1",
+        "template--16651073782008__b172a0f0-cf84-40d6-8fdf-a213395fa28f-167173421833ff921f-2",
+        "3f91b37a-40c9-4171-9324-e2dac05665a8"
+      ],
+      "settings": {
+        "title": "New Products",
+        "image_ratio": "square",
+        "color_scheme": "background-1",
+        "swipe_on_mobile": false,
+        "image_padding": false,
+        "show_view_all": false
+      }
+    },
+    "b3f67507-7900-432d-8a39-2eb1e450ebf9": {
+      "type": "cta-image-banner",
+      "blocks": {
+        "template--16651073782008__b3f67507-7900-432d-8a39-2eb1e450ebf9-167173421881e07263-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Just need to reorder?"
+          }
+        },
+        "template--16651073782008__b3f67507-7900-432d-8a39-2eb1e450ebf9-167173421881e07263-1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Cllick below for easy reorders."
+          }
+        },
+        "template--16651073782008__b3f67507-7900-432d-8a39-2eb1e450ebf9-167173421881e07263-2": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "view order history",
+            "button_link_1": "https:\/\/teaforte-wholesale.myshopify.com\/account",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16651073782008__b3f67507-7900-432d-8a39-2eb1e450ebf9-167173421881e07263-0",
+        "template--16651073782008__b3f67507-7900-432d-8a39-2eb1e450ebf9-167173421881e07263-1",
+        "template--16651073782008__b3f67507-7900-432d-8a39-2eb1e450ebf9-167173421881e07263-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/wholesale-reorder-banner-new.jpg",
+        "desktop_text_box_position": "center",
+        "color_scheme": "background-1",
+        "stack_images_on_mobile": true,
+        "adapt_height_first_image": false
+      }
+    },
+    "1ad82d9e-48ad-4f78-863a-7e86ff70af26": {
+      "type": "multicolumn-grid",
+      "disabled": true,
+      "blocks": {
+        "template--16651073782008__1ad82d9e-48ad-4f78-863a-7e86ff70af26-1671734341cf0fabb9-0": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ZakuroTeaCupAndSet.jpg",
+            "title": "OUR RECYCLING PROGRAM",
+            "text": "",
+            "button_label_1": "Learn more",
+            "button_link_1": ""
+          }
+        },
+        "template--16651073782008__1ad82d9e-48ad-4f78-863a-7e86ff70af26-1671734341cf0fabb9-1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Wellbeing.jpg",
+            "title": "ARTICLES AND RECIPES",
+            "text": "",
+            "button_label_1": "LEARN MORE",
+            "button_link_1": ""
+          }
+        },
+        "template--16651073782008__1ad82d9e-48ad-4f78-863a-7e86ff70af26-1671734341cf0fabb9-2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/tea-forte-main-image.jpg",
+            "title": "TEA HEALTH AND BENEFITS",
+            "text": "",
+            "button_label_1": "LEARN MORE",
+            "button_link_1": ""
+          }
+        },
+        "d3a0e728-32a8-4294-9351-06f4e9a96003": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WJTC_480x480_efab8399-a280-4a1e-b48d-cf38eba3c223.jpg",
+            "title": "FAQS",
+            "text": "",
+            "button_label_1": "LEARN MORE",
+            "button_link_1": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16651073782008__1ad82d9e-48ad-4f78-863a-7e86ff70af26-1671734341cf0fabb9-0",
+        "template--16651073782008__1ad82d9e-48ad-4f78-863a-7e86ff70af26-1671734341cf0fabb9-1",
+        "template--16651073782008__1ad82d9e-48ad-4f78-863a-7e86ff70af26-1671734341cf0fabb9-2",
+        "d3a0e728-32a8-4294-9351-06f4e9a96003"
+      ],
+      "settings": {
+        "title": "",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "Button label",
+        "button_link": "",
+        "swipe_on_mobile": false
+      }
+    }
+  },
+  "order": [
+    "9b83df47-452c-44af-962a-e7473660d23d",
+    "dce8cfcd-93c5-4c8e-b01a-46729cde0c02",
+    "main",
+    "4c60be12-e39b-45d0-b679-0476558bb7ba",
+    "a2d7d99c-4313-4998-822a-da7488851b59",
+    "b172a0f0-cf84-40d6-8fdf-a213395fa28f",
+    "b3f67507-7900-432d-8a39-2eb1e450ebf9",
+    "1ad82d9e-48ad-4f78-863a-7e86ff70af26"
+  ]
+}

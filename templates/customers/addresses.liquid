@@ -1,0 +1,86 @@
+<script src="{{ 'template-addresses.js' | asset_url }}" type="module"></script>
+
+{%- paginate customer.addresses by 5 -%}
+  <div class="container container--narrow center pv2">
+    <h1>{{ 'customer.addresses.title' | t }}</h1>
+    <hh-button href="{{ routes.account_url }}" theme="tertiary">
+      {{ 'customer.account.return' | t }}
+    </hh-button>
+
+    <div class=" mt1">
+      <hh-button-wrapper theme="primary">
+        <button class="js-toggle-new-address" type="button" aria-expanded="false" aria-controls="AddAddress">
+          {{ 'customer.addresses.add_new' | t }}
+        </button>
+      </hh-button-wrapper>
+
+      <div class="left hidden js-add-address-form" id="AddAddress">
+        <h2 id="AddressNewHeading">{{ 'customer.addresses.add_new' | t }}</h2>
+        {%- assign call_to_action = 'customer.addresses.add' | t -%}
+        {%- render 'address-form',
+          id_prefix: 'NewAddress',
+          labeled_by: 'AddressNewHeading',
+          form: customer.new_address,
+          cancel_button_class: 'js-toggle-new-address',
+          call_to_action: call_to_action
+        -%}
+      </div>
+    </div>
+
+    <ul role="list" class="mt2">
+      {%- for address in customer.addresses -%}
+        <li class="mt2">
+          {%- if address == customer.default_address -%}
+            <h2>{{ 'customer.addresses.default' | t }}</h2>
+          {%- endif -%}
+
+          {{ address | format_address }}
+
+          <hh-button-wrapper theme="tertiary">
+            <button
+              type="submit"
+              class="mr05 js-toggle-edit-address"
+              aria-label="{{ 'customer.addresses.edit_address' | t }} {{ forloop.index }}"
+              aria-controls="EditAddress_{{ address.id }}"
+              aria-expanded="false"
+              data-address="{{ forloop.index }}"
+            >
+            {{ 'customer.addresses.edit' | t }}
+            </button>
+          </hh-button-wrapper>
+          <hh-button-wrapper theme="tertiary">
+            <button
+              type="reset"
+              class="js-delete-address"
+              aria-label="{{ 'customer.addresses.delete' | t }} {{ forloop.index }}"
+              data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+              data-target="{{ address.url }}"
+              data-address="{{ forloop.index }}"
+            >
+            {{ 'customer.addresses.delete' | t }}
+            </button>
+          </hh-button-wrapper>
+
+          <div class="left hidden js-edit-address-form" id="EditAddress_{{ address.id }}" data-address="{{ forloop.index }}">
+            <h2 id="{{ 'AddressHeading_' | append: forloop.index }}">{{ 'customer.addresses.edit_address' | t }}</h2>
+            {%- assign id_prefix = 'EditAddress_' | append: forloop.index -%}
+            {%- assign labeled_by = 'AddressHeading_' | append: forloop.index -%}
+            {%- assign call_to_action = 'customer.addresses.update' | t -%}
+            {%- render 'address-form',
+              index: forloop.index,
+              id_prefix: id_prefix,
+              labeled_by: labeled_by,
+              form: address,
+              cancel_button_class: 'js-toggle-edit-address',
+              call_to_action: call_to_action
+            -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if paginate.pages > 1 -%}
+      {% render 'pagination', paginate: paginate, class: 'mt2' %}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}

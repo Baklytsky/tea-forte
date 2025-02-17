@@ -1,0 +1,23 @@
+.product-grid__overlay {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  padding: 0 5rem;
+  background-color: var(--hh-color-neutral);
+}
+
+.product-grid.is-loading .product-grid__overlay {
+  display: block;
+}
+
+.product-grid.is-loading .product-grid__count {
+  visibility: hidden;
+}
+
+.product-grid--empty .product-grid__title {
+  margin-top: 10rem;
+  margin-bottom: 15rem;
+}

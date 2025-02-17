@@ -1,0 +1,96 @@
+.product__info-container > * + * {
+  margin: 4rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .product__info-container--sticky {
+    position: sticky;
+    top: 3rem;
+    z-index: 2;
+  }
+
+  .product__info-wrapper {
+    padding-left: 5rem;
+  }
+
+  .product__info-container > *:first-child {
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product__media-wrapper {
+    max-width: 50% !important;
+    width: calc(50% - 1rem / 2) !important;
+  }
+
+  .product__info-wrapper {
+    padding-left: 4rem;
+    max-width: 50% !important;
+    width: calc(50% - 1rem / 2) !important;
+  }
+}
+
+.product__info-wrapper {
+  color: #060606;
+}
+
+.product__info-wrapper h1.h4 {
+  color: #455560 !important;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: 'Gotham Medium';
+}
+
+/* Product form */
+
+/* Form Elements */
+
+/* Product info */
+
+.product__sparklayer-container {
+  margin: 0 0 1em;
+  position: relative;
+}
+
+.product__sparklayer-container__stock-info {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: var(--spark-pricing-fontsize, 16px);
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+  .product__sparklayer-container__stock-info {
+    right: -50px;
+  }
+}
+
+/* SparkLayer's MSRP comparison is broken so we implemented this */
+.product__sparklayer-container__price {
+  order: -1;
+}
+
+/* SparkLayer's stock messaging is broken so we implemented this */
+.product__sparklayer-container__low-stock {
+  background-color: rgb(255, 251, 237);
+  color: rgb(185, 94, 4);
+  transform: translateY(-2px);
+  font-size: 0.8em;
+  display: inline-block;
+  padding: 0 5px;
+  margin-right: 2px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.product__accordion .accordion__content {
+  padding: 0 1rem;
+}

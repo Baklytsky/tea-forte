@@ -1,0 +1,126 @@
+{% comment %}
+  This can be set up to have groupings/categories of questions, or just a list of questions.
+{% endcomment %}
+
+{%- render 'async-stylesheet', url: 'section-faq.css' -%}
+
+{%- if section.settings.title -%}
+  <h1>{{ section.settings.title }}</h1>
+{%- endif -%}
+
+{%- if section.settings.allow_for_categories -%}
+  <nav>
+    <ul class="list-unstyled">
+      {%- for block in section.blocks -%}
+        {%- if block.type == "category" -%}
+          <li>
+            <a class="link" href="#{{ block.settings.category | handleize }}">
+              {{ block.settings.category }}
+            </a>
+          </li>
+        {%- endif -%}
+    {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}
+
+{%- for block in section.blocks -%}
+  {%- if section.settings.allow_for_categories and block.type == "category" -%}
+    {%- assign category = block.settings.category -%}
+    <h2 id="{{ category | handleize }}">{{ category }}</h2>
+    {%- for questionBlock in section.blocks -%}
+      {%- if questionBlock.type == "question" and questionBlock.settings.category == category -%}
+        <div class="faq-item">
+          <details>
+            <summary class="faq-question">
+              <h3 class="faq-question__question">
+                {{ questionBlock.settings.question }}
+              </h3>
+              {% render 'icon' with 'plus' %}
+            </summary>
+            <div class="faq-answer">
+              {{ questionBlock.settings.answer }}
+            </div>
+          </details>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- elsif section.settings.allow_for_categories == false -%}
+    {%- if block.type == "question" -%}
+      <div class="faq-item">
+        <details>
+          <summary class="faq-question">
+            <h3 class="faq-question__question">
+              {{ block.settings.question }}
+            </h3>
+            {% render 'icon' with 'plus' %}
+          </summary>
+          <div class="faq-answer">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "container",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_for_categories",
+      "default": false,
+      "label": "Allow for category separations"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category label, that gets printed on screen"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "default": "This is a question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Optional category. Must match one of the category labels exactly"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQs"
+    }
+  ]
+}
+{% endschema %}

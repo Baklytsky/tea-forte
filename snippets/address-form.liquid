@@ -1,0 +1,161 @@
+{%- form 'customer_address', form, aria-labelledBy: labeled_by -%}
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.first_name' | t -%}
+    {%- assign id = id_prefix | append: 'FirstName'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[first_name]',
+      label: label,
+      autocomplete: 'given-name',
+      required: true,
+      value: form.first_name
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.last_name' | t -%}
+    {%- assign id = id_prefix | append: 'LastName'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[last_name]',
+      label: label,
+      autocomplete: 'family-name',
+      required: true,
+      value: form.last_name
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.company' | t -%}
+    {%- assign id = id_prefix | append: 'Organization'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[company]',
+      label: label,
+      autocomplete: 'organization',
+      required: false,
+      value: form.company
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.address1' | t -%}
+    {%- assign id = id_prefix | append: 'Address1'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[address1]',
+      label: label,
+      autocomplete: 'address-line1',
+      required: true,
+      value: form.address1
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.address2' | t -%}
+    {%- assign id = id_prefix | append: 'Address2'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[address2]',
+      label: label,
+      autocomplete: 'address-line2',
+      required: false,
+      value: form.address2
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.city' | t -%}
+    {%- assign id = id_prefix | append: 'City'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[city]',
+      label: label,
+      autocomplete: 'address-level2',
+      required: true,
+      value: form.city
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1" icon='right' animation='none'>
+    {%- assign label = 'customer.addresses.country' | t -%}
+    {%- assign id = id_prefix | append: 'Country'  -%}
+    {%- render 'input',
+      type: 'select',
+      id: id,
+      name: 'address[country]',
+      label: label,
+      required: true,
+      value: form.country
+      options: all_country_option_tags
+    -%}
+  </hh-input-wrapper>
+  {%- if index -%}
+    {%- assign container_id = 'EditAddress_' | append: index | append: 'ProvinceContainer' -%}
+  {%- else -%}
+    {%- assign container_id = 'NewAddressProvinceContainer' -%}
+  {%- endif -%}
+  <hh-input-wrapper class="mb1" id="{{ container_id }}" icon='right' animation='none'>
+    {%- assign label = 'customer.addresses.province' | t -%}
+    {%- assign id = id_prefix | append: 'Province'  -%}
+    {%- render 'input',
+      type: 'select',
+      id: id,
+      name: 'address[province]',
+      label: label,
+      autocomplete: 'address-level1',
+      required: true,
+      value: form.province
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.zip' | t -%}
+    {%- assign id = id_prefix | append: 'Zip'  -%}
+    {%- render 'input',
+      type: 'text',
+      id: id,
+      name: 'address[zip]',
+      label: label,
+      autocomplete: 'postal-code',
+      required: true,
+      value: form.zip
+    -%}
+  </hh-input-wrapper>
+  <hh-input-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.phone' | t -%}
+    {%- assign id = id_prefix | append: 'Phone'  -%}
+    {%- render 'input',
+      type: 'tel',
+      id: id,
+      name: 'address[phone]',
+      label: label,
+      autocomplete: 'tel',
+      required: false,
+      value: form.phone
+    -%}
+  </hh-input-wrapper>
+  <hh-checkbox-wrapper class="mb1">
+    {%- assign label = 'customer.addresses.set_default' | t -%}
+    {%- assign id = id_prefix | append: 'Default'  -%}
+    {%- render 'input',
+      type: 'checkbox',
+      id: id,
+      name: 'address[default]',
+      label: label
+    -%}
+  </hh-checkbox-wrapper>
+  <div class="mt1 center">
+    <hh-button-wrapper theme="primary">
+      <button class="mr05">{{ call_to_action }}</button>
+    </hh-button-wrapper>
+    <hh-button-wrapper theme="secondary">
+      <button
+        type="reset"
+        class="{{ cancel_button_class }}"
+        data-address="{{ index | default: -1 }}"
+      >
+      {{ 'customer.addresses.cancel' | t }}
+      </button>
+    </hh-button-wrapper>
+  </div>
+{%- endform -%}

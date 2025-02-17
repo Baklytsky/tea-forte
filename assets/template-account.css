@@ -1,0 +1,132 @@
+/* TODO: Move these classes to the global stylesheets */
+
+.sr-only {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 0;
+}
+
+.btn {
+  font: var(--hh-body-font);
+  min-height: 32px;
+  min-width: 194px;
+  text-align: center;
+  padding: 5px 20px;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+  border: 0;
+  transition: all 300ms;
+}
+
+.btn--primary {
+  color: var(--hh-color-reverse);
+  border: 1px solid var(--hh-color-brand-secondary);
+  background-color: var(--hh-color-brand-secondary);
+}
+
+.btn--gold {
+  color: var(--hh-color-reverse);
+  background-color: var(--hh-color-brand-primary);
+  border-color: var(--hh-color-brand-primary);
+}
+
+.btn--primary:hover {
+  color: var(--hh-color-brand-secondary);
+  background-color: transparent;
+}
+
+.btn--gold:hover {
+  background-color: var(--hh-color-gold);
+}
+
+.text-input__el {
+  margin-bottom: 30px;
+  padding: 12px 20px;
+  border-radius: 0;
+  border: 1px solid #c4c4c4;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font: var(--hh-body-font);
+  font-weight: 325;
+  font-size: 1.6rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: var(--hh-color-secondary);
+}
+
+.text-input__el::placeholder {
+  color: rgba(0, 0, 0, 0.41);
+}
+
+.customer-activation__wrapper {
+  padding: 80px 35px;
+}
+
+.customer-section__heading {
+  margin-bottom: 80px;
+  font-size: 4.2rem;
+  line-height: 42px;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.customer-section__subheading {
+  margin-bottom: 80px;
+  font-size: 2.4rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  font-weight: 325;
+}
+
+.btn__wrapper {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.btn__activate,
+.btn__decline {
+  padding: 13px 0;
+  font-weight: 325;
+  font-size: 2.4rem;
+  line-height: 16px;
+  letter-spacing: 1px;
+}
+
+@media screen and (max-width: 749px) {
+  .account__wrapper {
+    display: block;
+  }
+
+  .customer-section__heading {
+    margin-bottom: 40px;
+  }
+
+  .customer-section__subheading {
+    margin-bottom: 40px;
+    font-size: 1.6rem;
+  }
+
+  .text-input__el {
+    margin-bottom: 16px;
+  }
+
+  .btn__wrapper {
+    margin-top: 20px;
+    grid-template-columns: 1fr;
+    grid-gap: 16px;
+  }
+
+  .btn__activate,
+  .btn__decline {
+    padding: 0;
+    font-size: 1.2rem;
+  }
+}

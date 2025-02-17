@@ -1,0 +1,18 @@
+[data-shopify-xr] > svg {
+  width: 1.4rem;
+  margin-right: 1rem;
+}
+
+[data-shopify-xr][data-shopify-xr-hidden] {
+  visibility: hidden;
+}
+
+model-viewer {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

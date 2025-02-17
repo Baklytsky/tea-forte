@@ -1,0 +1,82 @@
+import { html, css } from 'lit'
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import './../tabs.js'
+
+<Meta title="Tabs" />
+
+# Tabs
+
+An example of how to set up accessible tabs, based on this site https://katekalcevich.github.io/Test-ARIA/test-tabs.html. You can add an attribute to the `<tab-element>`, 'data-mobile-only="true"', if you want the tab functionality to work only mobile, not on desktop. All tabs would be visible on desktop, and the aria/accessible functionality would be removed. It would also hide the tablist (the buttons) - given that all tabs are visible in this situation, the buttons serve no visual/functional purpose. All style would be controlled through your instance of a component - `.js-tab` gets an `active` class added to it (style as you wish) to show that it's the selected tab. `.js-tabpanel` will get the `hidden` class if it's hidden (which will be removed if it's visible). The naming conventions are somehwat important - if you choose for it to be mobile only, the `aria-labelledby` gets removed on desktop but added back in if the screen is resized. To add it back in, the function takes the id of the element, splits it, and adds it back in as the aria-labelledby (ex. `apples-panel` gets split and `apples` is entered into the aria-labelledby as `apples-tab`).
+
+### Simple Usage:
+
+<Canvas>
+  <Story name="Default">
+    {({}) => html`<style>
+        .hidden {
+          display: none;
+        }</style
+      ><hh-tabs class="tabs"
+        ><div class="js-tablist" role="tablist">
+          <button
+            type="button"
+            class="active js-tab"
+            role="tab"
+            aria-selected="true"
+            id="apples-tab"
+            aria-controls="apples-panel"
+          >
+            Apples
+          </button>
+          <button
+            type="button"
+            class="js-tab"
+            role="tab"
+            aria-selected="false"
+            id="bananas-tab"
+            aria-controls="bananas-panel"
+          >
+            Bananas
+          </button>
+          <button
+            type="button"
+            class="js-tab"
+            role="tab"
+            aria-selected="false"
+            id="peaches-tab"
+            aria-controls="peaches-panel"
+          >
+            Peaches
+          </button>
+        </div>
+        <div
+          id="apples-panel"
+          class="js-tabpanel"
+          role="tabpanel"
+          aria-labelledby="apples-tab"
+          tabindex="-1"
+        >
+          <h3>Apples</h3>
+          <p>Apples are amazing!</p>
+        </div>
+        <div
+          id="bananas-panel"
+          class="hidden js-tabpanel"
+          role="tabpanel"
+          aria-labelledby="bananas-tab"
+        >
+          <h3>Bananas</h3>
+          <p>Don't slip on your banana peel!</p>
+        </div>
+        <div
+          id="peaches-panel"
+          class="hidden js-tabpanel"
+          role="tabpanel"
+          aria-labelledby="peaches-tab"
+        >
+          <h3>Peaches</h3>
+          <p>Peaches keep peaching!</p>
+        </div></hh-tabs
+      >`}
+  </Story>
+</Canvas>

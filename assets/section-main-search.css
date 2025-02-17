@@ -1,0 +1,21 @@
+.main-search__search-form {
+  margin: 0 auto;
+  max-width: 29.5rem;
+}
+
+.main-search__submit-button {
+  width: 15px;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  z-index: 2;
+}
+
+.main-search__results {
+  margin: 6em auto 0;
+}
+

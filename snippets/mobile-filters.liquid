@@ -1,0 +1,66 @@
+{% render 'async-stylesheet', url: 'snippet-mobile-filters.css' %}
+
+<hh-details-modal class="js-drawer hidden--md hidden--lg" ctx="filters">
+  <div slot="summary">
+    <hh-button-wrapper theme="secondary" width="full">
+      <button class="flex aic">
+        <span class="mr1" style="width: 20px">{% render 'icon' with 'filter' %}</span>
+        <span>{{ 'sections.collection_template.filter_and_sort' | t }}</span>
+        <span class="count-bubble">
+          {%- if total_active_values > 0 -%}{{ total_active_values }}{%- endif -%}
+        </span>
+      </button>
+    </hh-button-wrapper>
+    <span class="hidden">{% render 'icon' with 'close' %}</span>
+  </div>
+  <div slot="details">
+    <hh-filters-wrapper class="block w1">
+      <form class="container" id="CollectionFiltersFormMobile">
+        <div class="center">
+          <h2 class="h5 mb0">{{ 'sections.collection_template.filter_and_sort' | t }}</h2>
+          <p class="p2 mt025">{{ 'sections.collection_template.product_count' | t: product_count: collection.products_count, count: collection.all_products_count }}</p>
+        </div>
+        <div class="mobile-filters__inner">
+          {%- for filter in collection.filters -%}
+            {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+            {% render 'filter', ctx: 'mobile', filter: filter, index: forloop.index %}
+          {%- endfor -%}
+
+          {%- if section.settings.enable_sorting -%}
+            <div class="flex jce">
+              <div class="collection-filters__sort-container w1">
+                <hh-input-wrapper icon='right' animation='none' label="stacked">
+                  {%- assign label = 'sections.collection_template.sort_by_label' | t -%}
+                  {%- capture options -%}
+                    {%- for option in collection.sort_options -%}
+                      <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                    {%- endfor -%}
+                  {%- endcapture -%}
+                  {%- render 'input',
+                    type: 'select',
+                    id: 'SortBy',
+                    name: 'sort_by',
+                    label: label,
+                    options: options
+                  -%}
+                </hh-input-wrapper>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="flex aic jcb mt2">
+          <a href="javascript:void(0)" class="underline" data-close>{{ 'sections.collection_template.close' | t }}</a>
+          <hh-button-wrapper theme="primary" class="w12" width="full">
+            <button type="button" data-close>{{ 'sections.collection_template.apply' | t }}</button>
+          </hh-button-wrapper>
+          <noscript><button>{{ 'sections.collection_template.apply' | t }}</button></noscript>
+        </div>
+
+        {% if collection.current_vendor or collection.current_type %}
+          <input type="hidden" name="q" value="{{ collection.current_vendor }}{{ collection.current_type }}">
+        {% endif %}
+      </form>
+    </hh-filters-wrapper>
+  </div>
+</hh-details-modal>

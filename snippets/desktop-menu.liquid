@@ -1,0 +1,85 @@
+{%- render 'async-stylesheet', url: 'snippet-desktop-menu.css' -%}
+<div class="desktop-menu hidden--sm hidden--md">
+  {%- for link in mod_menu.links -%}
+    <li>
+      {%- if link.links != blank -%}
+        <!-- Parent link with children -->
+        <details>
+          <summary class="header__menu-item header__menu-link header__menu-link--parent">
+            <span class="{%- if link.child_active %}header__active-menu-item{% endif %}">{{ link.title }}</span>
+          </summary>
+          <div class="header__submenu--child">
+            <div class="header__submenu--child-content container js-header-submenu-container">
+              <div class="header__submenu js-submenu" tabindex="-1">
+                <div class="header__submenu--parents">
+                  {%- assign group_count = 0 -%}
+                  {%- for childlink in link.links -%}
+                    <div class="header__submenu--parents-item">
+                      <a
+                        href="{{ childlink.url }}"
+                        class="header__submenu--item
+                          {% if childlink.links != blank %}
+                            js-header-submenu-trigger
+                            {% if group_count == 0 %} active{% endif %}
+                            {% assign group_count = group_count | plus: 1 %}
+                          {% endif %}
+                        "
+                        {% if childlink.current %}
+                          aria-current="page"
+                        {% endif %}
+                        {% if childlink.links != blank %}
+                          data-child-group="submenu-item--{{ forloop.index0 }}"
+                        {% endif %}
+                      >
+                        <span>{{ childlink.title }}</span>
+                      </a>
+                    </div>
+                  {%- endfor -%}
+                </div>
+                <div class="header__submenu--children js-header-submenu-content">
+                  {%- assign group_count = 0 -%}
+                  {%- for childlink in link.links -%}
+                    {%- if childlink.links != blank -%}
+                      {%- assign group_count = group_count | plus: 1 -%}
+                      <div
+                        class="header__submenu--children-group js-header-submenu-group
+                        {% if group_count == 1 %} active{% endif %}
+                        "
+                        data-child-group="submenu-item--{{ forloop.index0 }}"
+                      >
+                        <div class="header__submenu--children-column">
+                          {%- for grandchildlink in childlink.links -%}
+                            <div class="header__submenu--children-item">
+                              <a
+                                href="{{ grandchildlink.url }}"
+                                class="header__menu-item header__menu-link header__menu-item--grandchild"
+                                {% if grandchildlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                              >
+                                <span>{{ grandchildlink.title }}</span>
+                              </a>
+                            </div>
+                            {%- if forloop.index0 == 7 -%}
+                              </div>
+                              <div class="header__submenu--children-column">
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </ul>
+            </div>
+          </div>
+        </details>
+      {%- else -%}
+        <!-- Parent link without children -->
+        <a href="{{ link.url }}" class="header__menu-item header__menu-link header__menu-link--parent"{% if link.current %} aria-current="page"{% endif %}>
+          <span {%- if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+        </a>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+</div>

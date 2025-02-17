@@ -1,0 +1,103 @@
+.vp__input {
+  flex: 0 0 100%;
+  padding: 0;
+  margin: 0 0 1.2rem 0;
+  max-width: 37rem;
+  min-width: fit-content;
+  border: none;
+}
+
+.vp__input--dropdown {
+  margin-bottom: 1.6rem;
+}
+
+.vp__input .form__label {
+  padding-left: 0;
+}
+
+fieldset.vp__input .form__label {
+  margin-bottom: 0.2rem;
+}
+
+.vp__input input[type='radio'] {
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+.vp__input input[type='radio'] + label {
+  border: 0.1rem solid var(--hh-color-neutral);
+  border-radius: 4rem;
+  background-color: var(--hh-color-background);
+  color: var(--hh-color-foreground);
+  display: inline-block;
+  margin: 0.7rem 0.5rem 0.2rem 0;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+  line-height: 1;
+  text-align: center;
+  transition: border var(--hh-duration-short) ease;
+  cursor: pointer;
+}
+
+.vp__input input[type='radio'] + label:hover {
+  border: 0.1rem solid var(--hh-color-foreground);
+}
+
+.vp__input input[type='radio']:checked + label {
+  background-color: var(--hh-color-foreground);
+  color: var(--hh-color-background);
+}
+
+.vp__input input[type='radio']:disabled + label {
+  border-color: var(--hh-color-light);
+  color: var(--hh-color-neutral);
+  text-decoration: line-through;
+}
+.vp__input input[type='radio']:focus-visible + label {
+  box-shadow: 0 0 0 0.3rem var(--hh-color-background),
+    0 0 0 0.5rem var(--hh-color-neutral);
+}
+
+/* Fallback */
+.vp__input input[type='radio']:focus + label {
+  box-shadow: 0 0 0 0.3rem var(--hh-color-background),
+    0 0 0 0.5rem var(--hh-color-neutral);
+}
+
+/* No outline when focus-visible is available in the browser */
+.vp__input input[type='radio']:focus:not(:focus-visible) + label {
+  box-shadow: none;
+}
+
+.vp__input__select {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 25rem;
+}
+
+.vp__input__select svg {
+  height: 0.6rem;
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 0.35rem);
+  right: 1.5rem;
+}
+
+.vp__input__select__select {
+  padding: 0 4rem 0 1.5rem;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  color: rgb(var(--hh-color-foreground));
+  width: 100%;
+  box-shadow: 0 0 0 0.1rem var(--hh-color-foreground);
+  height: 4.5rem;
+  box-sizing: border-box;
+  transition: box-shadow var(--hh-duration-short) ease;
+}

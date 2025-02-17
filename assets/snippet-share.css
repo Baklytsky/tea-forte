@@ -1,0 +1,42 @@
+.share {
+  margin: 2.5rem 0;
+}
+
+.share {
+  display: block;
+  position: relative;
+}
+
+.share__button .icon-share {
+  margin-right: 1rem;
+}
+
+.share__fallback {
+  border: 0.1rem solid var(--hh-color-light);
+  background: var(--hh-color-background);
+  padding: 2rem;
+  position: absolute;
+  top: 4rem;
+  left: -0.1rem;
+  z-index: 3;
+  width: 100%;
+}
+
+.share__fallback {
+  display: flex;
+  flex-direction: column;
+}
+
+.share__fallback .button {
+  margin-top: 1rem;
+}
+
+.share__fallback .icon-clipboard {
+  height: 1.4rem;
+  width: 1.8rem;
+}
+
+.share__message:not(:empty) {
+  display: block;
+  margin-top: 0.5rem;
+}

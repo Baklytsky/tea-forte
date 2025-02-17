@@ -1,0 +1,221 @@
+.account-forms__tablist {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 990px) {
+  .account-forms__tablist {
+    flex: 1 0 100%;
+  }
+}
+
+.account-tablist__item {
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid var(--hh-color-neutral);
+  margin-right: 1rem;
+  text-decoration: none;
+  width: 50%;
+  min-height: 40px;
+}
+
+.account-tablist__item.active {
+  border-color: var(--hh-color-night);
+}
+
+.account-tablist__item:last-of-type {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+@media screen and (min-width: 990px) {
+  .account-tablist__item {
+    border-bottom: none;
+  }
+}
+
+.account-forms__tab {
+  width: 100%;
+}
+
+@media screen and (min-width: 990px) {
+  .account-forms__tab {
+    width: 50%;
+  }
+
+  .account-forms__tab:first-child {
+    margin-right: 20px;
+  }
+
+  .account-forms__tab:last-child {
+    margin-left: 20px;
+  }
+}
+
+#shopify-section-header,
+.footer {
+  display: none;
+}
+
+#CustomerLoginForm .header__heading-link,
+#RecoverPasswordForm .header__heading-link,
+#RegisterForm .header__heading-link {
+  width: 110px;
+  padding: 0;
+  margin-bottom: 100px;
+}
+
+#CustomerLoginForm .header__heading-link img,
+#RecoverPasswordForm .header__heading-link img,
+#RegisterForm .header__heading-link img {
+  width: 100%;
+}
+
+#login-panel {
+  padding: 30px 125px 50px 50px;
+}
+
+#login-panel h1,
+#RegisterForm h1 {
+  text-transform: none;
+  font-size: 58px;
+  line-height: 65px;
+  color: #5c5c5c;
+  margin: 0 0 15px 0;
+}
+
+#login-panel p,
+#RegisterForm p {
+  margin: 0 0 50px 0;
+  color: #5c5c5c;
+}
+
+#login--background {
+  order: 2;
+  width: 50%;
+  background-image: url(//cdn.shopify.com/s/files/1/0634/2983/7048/files/wholesale-login-background_030323.jpg?v=1677862427);
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+}
+
+#customer_login button,
+#RecoverPasswordForm button,
+#RegisterForm button {
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 20px;
+  letter-spacing: 3px;
+  padding: 12px 0;
+}
+
+.account--title {
+  text-align: center;
+  margin: 0 !important;
+  font-size: 16px;
+}
+
+.account--link {
+  text-align: center;
+  color: #ae8e4b;
+  display: block;
+  margin-bottom: 30px;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+.customers--register #RegisterForm {
+  display: block !important;
+}
+
+.customers--register .account-forms__tab {
+  width: 100%;
+}
+
+.customers--register #login-panel {
+  width: 50%;
+}
+
+@media (min-width: 992px) {
+  .container {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .account-forms__tab:last-child {
+    width: 50%;
+  }
+
+  .customers--register .account-forms__tab {
+    width: 100%;
+  }
+
+  .customers--register #login-panel {
+    margin-left: 15%;
+    width: 35%;
+  }
+}
+
+@media (max-width: 991px) {
+  .customers--register #login-panel {
+    width: 100%;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .flex.mb2 {
+    display: block;
+    margin-top: -40px;
+  }
+
+  #CustomerLoginForm .header__heading-link,
+  #RecoverPasswordForm .header__heading-link,
+  .account-forms__tablist.js-tablist,
+  #RegisterForm .header__heading-link {
+    display: none;
+  }
+
+  #login--background {
+    order: 1;
+    width: 100%;
+    float: left;
+    clear: both;
+    height: 50vh;
+  }
+
+  #login-panel h1 {
+    margin-top: 25px;
+  }
+
+  #login-panel h1,
+  #login-panel p {
+    text-align: center;
+  }
+
+  #CustomerLoginForm .header__heading-link img,
+  #RecoverPasswordForm .header__heading-link img,
+  #RegisterForm .header__heading-link {
+    display: none;
+  }
+
+  #login-panel {
+    padding: 0 20px;
+    margin-left: 0;
+    order: 2;
+    width: 100%;
+    float: left;
+    clear: both;
+  }
+}
+
+@media (max-width: 768px) {
+  #login-panel h1 {
+    font-size: 38px;
+    line-height: 48px;
+  }
+}

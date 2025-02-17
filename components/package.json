@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "scripts": {
+    "watch": "node ./scripts/esbuild.js --watch",
+    "bundle": "node ./scripts/esbuild.js",
+    "start": "start-storybook -p 8080 -s ./src",
+    "build": "build-storybook -s ./src"
+  },
+  "dependencies": {
+    "@lit-labs/motion": "^1.0.3",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "lit": "^2.2.8"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.18.10",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@composi/gestures": "^1.0.9",
+    "@ljcl/storybook-addon-cssprops": "^2.3.5",
+    "@storybook/addon-essentials": "6.5",
+    "@storybook/web-components": "6.5",
+    "esbuild": "^0.15.5",
+    "globby": "^13.1.2",
+    "node-watch": "^0.7.3",
+    "tiny-glob": "^0.2.9"
+  }
+}

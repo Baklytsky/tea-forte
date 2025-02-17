@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "inline-cart": {
+      "type": "inline-cart"
+    }
+  },
+  "order": ["inline-cart"]
+}

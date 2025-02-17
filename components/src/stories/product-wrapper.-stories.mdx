@@ -1,0 +1,110 @@
+import { html, css } from 'lit'
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import { product } from './../cassettes/products/basic.json'
+
+import './../product-wrapper.js'
+import './../variant-selection.js'
+import './../quantity-input.js'
+import './../product-gallery.js'
+import './../button-wrapper.js'
+
+<Meta title="Product Wrapper" />
+
+# Product Wrapper
+
+Here's an example of how to scaffold out the product page (replace the JSX-style with Liquid):
+
+```html
+<hh-product-wrapper>
+  <hh-product-gallery slot="gallery">
+    <img data-id="41259510661307" loading="lazy"  src="${
+      product.images[0].src
+    }"/>
+    <img data-id="41259510694075" data-src="${product.images[1].src}" />
+  </hh-product-gallery>
+  <form slot="form" action="/submit" method="POST">
+    <hh-accordion>
+      <h3 slot="header">Variant Option</h3>
+      <div slot="body">
+        ${product.variants.map(
+          (variant) =>
+            html`
+              <hh-variant-selection id="${variant.id}">
+                <input
+                  type="radio"
+                  name="variant"
+                  value="${variant.title}"
+                />
+                <label for="${variant.title}">${variant.title}</label>
+              </hh-variant-selection>
+            `
+        )}
+    </hh-accordion>
+    <hh-quantity-input initial="1">
+      <button type="button" name="minus" slot="decrease">
+        <span class="visually-hidden">Decrease</span>
+        -
+      </button>
+      <button type="button" name="plus" slot="increase">
+        <span class="visually-hidden">Increase</span>+
+      </button>
+    </hh-quantity-input>
+    <hh-button-wrapper theme="secondary">
+      <button type="submit" value="submit">Submit</button>
+    </hh-button-wrapper>
+  </form>
+</hh-product-wrapper>
+```
+
+There are a few things going on here:
+
+- We use `hh-product-wrapper` to listen to events that come from child components, and manage state for the page.
+- We use `hh-button-wrapper` as a wrapper to style the submit button so that the native submit event bubbles up. [This doc](https://www.hjorthhansen.dev/shadow-dom-and-forms/) talks about the submit event in the ShadowDOM but the suggested workaround in the article is not great
+
+### Simple Usage:
+
+<Canvas>
+  <Story name="Default">
+    {() => html`
+      <hh-product-wrapper>
+        <hh-product-gallery slot="gallery">
+          <img data-id="41259510661307" loading="lazy"  src="${
+            product.images[0].src
+          }"/>
+          <img data-id="41259510694075" data-src="${product.images[1].src}" />
+        </hh-product-gallery>
+        <form slot="form" action="/submit" method="POST">
+          <hh-accordion>
+            <h3 slot="header">Variant Option</h3>
+            <div slot="body">
+              ${product.variants.map(
+                (variant) =>
+                  html`
+                    <hh-variant-selection id="${variant.id}">
+                      <input
+                        type="radio"
+                        name="variant"
+                        value="${variant.title}"
+                      />
+                      <label for="${variant.title}">${variant.title}</label>
+                    </hh-variant-selection>
+                  `
+              )}
+          </hh-accordion>
+          <hh-quantity-input initial="1">
+            <button type="button" name="minus" slot="decrease">
+              <span class="visually-hidden">Decrease</span>
+              -
+            </button>
+            <button type="button" name="plus" slot="increase">
+              <span class="visually-hidden">Increase</span>+
+            </button>
+          </hh-quantity-input>
+          <hh-button-wrapper theme="secondary">
+            <button type="submit" value="submit">Submit</button>
+          </hh-button-wrapper>
+        </form>
+      </hh-product-wrapper>
+    `}
+  </Story>
+</Canvas>

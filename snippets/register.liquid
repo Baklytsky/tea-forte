@@ -1,0 +1,76 @@
+<div id="RegisterForm" style="display:none;">
+<a href="/" class="header__heading-link"><img src="//cdn.shopify.com/s/files/1/0634/2983/7048/files/logo-min.png?v=1671043449" alt="Tea Forte Wholesale"></a>  
+<div>
+  <h1 class="h4">{{ 'customer.register.title' | t }}</h1>
+{% comment %}
+  {%- form 'create_customer', novalidate: 'novalidate' -%}
+    {% unless template.name == 'login' %}
+      {%- if form.errors -%}
+        <div class="mb1 bg-light px1 rounded">
+          <h2 class="flex utility aic" tabindex="-1" autofocus>
+            <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
+            <span style="width: 20px" class="mr05">{% render 'icon' with 'error' %}</span>
+            {{ 'templates.contact.form.error_heading' | t }}
+          </h2>
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+    {% endunless %}
+    <hh-input-wrapper class="mb1">
+      {%- assign label = 'customer.register.first_name' | t -%}
+      {%- render 'input',
+        type: 'text',
+        id: 'RegisterForm-FirstName',
+        name: 'customer[first_name]',
+        label: label,
+        autocomplete: 'given-name',
+        required: true,
+        value: form.first_name
+      -%}
+    </hh-input-wrapper>
+
+    <hh-input-wrapper class="mb1">
+      {%- assign label = 'customer.register.last_name' | t -%}
+      {%- render 'input',
+        type: 'text',
+        id: 'RegisterForm-LastName',
+        name: 'customer[last_name]',
+        label: label,
+        autocomplete: 'family-name',
+        required: true,
+        value: form.last_name
+      -%}
+    </hh-input-wrapper>
+
+    <hh-input-wrapper class="mb1">
+      {%- assign label = 'customer.register.email' | t -%}
+      {%- render 'input',
+        type: 'email',
+        id: 'RegisterForm-email',
+        name: 'customer[email]',
+        label: label,
+        required: true,
+        value: form.email
+      -%}
+    </hh-input-wrapper>
+
+    <hh-input-wrapper class="mb1">
+      {%- assign label = 'customer.register.password' | t -%}
+      {%- render 'input',
+        type: 'password',
+        id: 'RegisterForm-password',
+        name: 'customer[password]',
+        label: label,
+        required: true
+      -%}
+    </hh-input-wrapper>
+
+    <hh-button-wrapper theme="primary">
+      <button type="submit">
+      {{ 'customer.register.submit' | t }}
+      </button>
+    </hh-button>
+  {%- endform -%}
+{% endcomment %}
+</div>
+<a class="account--link" href="login" onclick="hideRegisterForm();return false;">Return to login page</a>

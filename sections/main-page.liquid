@@ -1,0 +1,19 @@
+{% render 'async-stylesheet', url: 'section-main-page.css' %}
+{% render 'async-stylesheet', url: 'component-rte.css' %}
+
+<div class="container container--narrow">
+  <h1 class="main-page-title page-title h0">
+    {{ page.title | escape }}
+  </h1>
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section"
+}
+{% endschema %}

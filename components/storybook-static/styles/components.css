@@ -1,0 +1,148 @@
+/**
+ * This is a place where we customize the CSS Variables
+ * that our growing library of web components use to allow
+ * theming on a per-implementation basis.
+ *
+ * The CSS Variables that are written within these web component
+ * statements are only available / scoped to that web component.
+ *
+ * Generally, web components should be written in a way where they
+ * can be skinned using CSS variables for most implementation use cases.
+ *
+ * If the web component has a story book entry, check the story book
+ * entry for more details on available css variables, or look at the
+ * source code for that web component.
+ *
+ * This is not a place to add raw CSS (e.g. background: red;).
+ */
+hh-button,
+hh-button-wrapper {
+  --hh-background: var(--hh-color-brand-primary);
+  --hh-border-bottom-offset: -2px;
+  --hh-font: var(--hh-body-utility);
+  --hh-font-large: var(--hh-body-utility-large);
+  --hh-padding: 11px 23px;
+  --hh-color: var(--hh-color-day);
+  --hh-text-transform: uppercase;
+  --hh-max-width: auto;
+}
+
+hh-button[theme='secondary'] {
+  --hh-background: var(--hh-color-brand-secondary);
+  --hh-border-width: 0;
+  --hh-font: var(--hh-body-utility);
+  --hh-font-large: var(--hh-body-utility-large);
+  --hh-padding: 11px 23px;
+  --hh-color: var(--hh-color-day);
+  --hh-text-transform: uppercase;
+}
+
+hh-button[theme='tertiary'] {
+  --hh-padding: 0;
+  --hh-background: transparent;
+}
+
+hh-details-modal {
+  --hh-top: 100%;
+  --hh-modal-height: 100%;
+  --hh-modal-background: var(--hh-color-background);
+}
+
+hh-details-modal[ctx='filters'] {
+  --hh-position: fixed;
+  --hh-top: 0;
+  --hh-z-index-inner: 100;
+}
+
+hh-quantity-input {
+  --hh-button-width: 1.4rem;
+  --hh-height: 4rem;
+  --hh-padding: 0.5rem 1.5rem;
+  --hh-color: var(--hh-color-subdued);
+}
+
+hh-input-wrapper {
+  --hh-label-opacity: 0.5;
+  --hh-font: 400 14px/30px 'Gotham Light', sans-serif;
+  --hh-label-font: 400 14px/30px 'Gotham Light', sans-serif;
+  --hh-height: 36px;
+  --hh-border-color: var(--hh-color-brand-secondary);
+  --hh-icon-width: 30px;
+}
+
+hh-input-wrapper[label='stacked'] {
+  --hh-label-font: var(--hh-body-font);
+  --hh-label-margin: 0 0 0.25em;
+}
+
+hh-modal {
+  --hh-padding: 0 1rem;
+  --hh-background: var(--hh-color-day);
+  --hh-border-color: var(--hh-color-neutral);
+}
+
+hh-modal[ctx='product'] {
+  --hh-slotted-width: calc(100% - 2rem);
+  --hh-slotted-margin: 1rem 0 0;
+}
+
+hh-slider {
+  --hh-background: var(--hh-color-light);
+  --hh-button-background: var(--hh-color-day);
+  --hh-button-border: 1px solid var(--hh-color-neutral);
+  --hh-cell-width: calc(100% - 3rem);
+  --hh-next-arrow: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' fill='none' class='icon icon-next' viewBox='0 0 19 19'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath stroke='%23AE8E4B' stroke-width='.5' d='M.25.25h18.5v18.5H.25V.25Z'/%3E%3Cpath fill='%23AE8E4B' d='M13.75 9.897 7 13.794V6l6.75 3.897Z'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h19v19H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+  --hh-arrow-width: 19px;
+  --hh-arrow-height: 19px;
+  --hh-bullet-active-background: var(--hh-color-brand-primary);
+}
+
+hh-slider:not([open='true']) {
+  --hh-container-flex: flex;
+  --hh-container-flex-wrap: wrap;
+}
+
+hh-badge-wrapper {
+  --hh-font: var(--hh-body-utility);
+  --hh-color-primary: var(--hh-color-day);
+  --hh-color-secondary: var(--hh-color-night);
+  --hh-background-primary: var(--hh-color-brand-primary);
+  --hh-background-secondary: var(--hh-color-brand-secondary);
+}
+
+/**
+ * Helps with the flash of unstyled components.
+ *
+ * Add to this as you build out new components that
+ * may abrasively flash before the JS file is interpreted.
+ */
+hh-tabs:not(:defined),
+hh-modal:not(:defined),
+hh-button:not(:defined),
+hh-button-wrapper:not(:defined),
+hh-details-modal:not(:defined),
+hh-quantity-input:not(:defined),
+hh-input-wrapper:not(:defined),
+hh-custom-select:not(:defined),
+hh-sticky-header:not(:defined),
+hh-badge-wrapper:not(:defined) {
+  opacity: 0;
+}
+
+hh-details-modal:not(:defined) {
+  visibility: hidden;
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+}
+
+hh-carousel {
+  --hh-background: transparent;
+  --hh-width: 100%;
+  --hh-height: 200px;
+  --hh-bullet-background: var(--hh-color-grey);
+  --hh-bullet-active-background: var(--hh-color-brand-primary);
+  --hh-next-arrow: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' fill='none' class='icon icon-next' viewBox='0 0 19 19'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath stroke='%23AE8E4B' stroke-width='.5' d='M.25.25h18.5v18.5H.25V.25Z'/%3E%3Cpath fill='%23AE8E4B' d='M13.75 9.897 7 13.794V6l6.75 3.897Z'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h19v19H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+  --hh-arrow-width: 19px;
+  --hh-arrow-height: 19px;
+}

@@ -1,0 +1,21 @@
+{% liquid
+  render 'async-stylesheet', url: 'customer.css'
+  render 'async-stylesheet', url: 'snippet-account-forms.css'
+%}
+
+<div class="container">
+  <div class="flex mb2">
+  <div id="login--background"></div>
+  
+  <div id="login-panel">
+    <div
+      id="register-panel"
+      class="account-forms__tab js-tabpanel"
+      role="tabpanel"
+      aria-labelledby="register-tab"
+    >
+      {% render 'register' %}
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<!-- Add this to layout/theme.liquid before closing head tag -->
+{%- if customer.metafields.sparklayer.authentication -%}
+  <!-- Anything inside here only shows for logged in customers -->
+  <!-- Start of SparkLayer core script -->
+  <script>
+  window.adjustSparkProductCard = function () {
+    document.querySelectorAll('spark-product-card').forEach((element) => {
+      const customCSS = document.createElement('style');
+      customCSS.innerHTML = `
+        spark-variant-info {
+          display: none;
+        }
+
+        .spark-product-card .button-purchase button.btn-small {
+          margin-top: 1em;
+        }
+      `;
+      element.shadowRoot.appendChild(customCSS);
+    })
+  }
+  window.sparkOptions = {
+    siteId: "teafortewholesale",
+    platform: "shopify",
+    rootUrl: {{ routes.root_url | json }},
+    language: {{ request.locale.iso_code | json }},
+    accountRedirect: null,
+    display: {
+      savingsUseRrp: true,
+      stock: {
+        show: false
+      },
+    },
+    auth: {
+      user: {{ customer.email | json }},
+      token: {{ customer.metafields.sparklayer.authentication | json }},
+    },
+    translations: {
+      en: {
+        cart: {
+          checkout: {
+              notes: {
+                label: "Purchase Order",
+                placeholder: "optional"              }
+            }
+        },
+      }
+    },
+    onReady() {
+      window.adjustSparkProductCard()
+    },
+    checkoutCustomElements: [
+      {
+        name: "notes-seller",
+        translations: {
+          en: {
+            title: "Notes to Seller"
+          }
+        },
+        attributes: {
+          placeholder: "optional",
+          type: "text",
+          minlength: 4,
+          maxlength: 600
+        }
+      },
+    ],
+  };
+  </script>
+  <script async src='https://cdn.sparklayer.io/spark.0.8.25.js'></script>
+  <!-- End of SparkLayer core script -->
+{%- endif -%}

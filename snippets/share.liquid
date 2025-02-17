@@ -1,0 +1,37 @@
+<script src="{{ 'component-share.js' | asset_url }}" defer="defer"></script>
+<link rel="stylesheet" href="{{ 'snippet-share.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<share-button class="share" {{ block.shopify_attributes }}>
+  <hh-button theme="tertiary" class="share__button hidden">
+    {% render 'icon' with 'share' %}
+    {{ 'general.share.share' | t }}
+  </hh-button>
+  <details>
+    <summary class="share__button">
+      {% render 'icon' with 'share' %}
+      {{ 'general.share.share' | t }}
+    </summary>
+    <div class="share__fallback">
+      <hh-input-wrapper class="mb1">
+        {%- assign label = 'general.share.share_url' | t -%}
+        {%- assign value = shop.url | append: product.url -%}
+        {%- capture attributes -%}onclick="this.select();" read-only placeholder="{{ 'general.share.share_url' | t }}"{%- endcapture -%}
+        {%- render 'input',
+          type: 'text',
+          id: 'url',
+          name: name,
+          label: label,
+          value: value
+          attributes: attributes
+        -%}
+      </hh-input-wrapper>
+      <hh-button theme="tertiary">
+        {% render 'icon' with 'clipboard' %}
+        {{ 'general.share.copy_to_clipboard' | t }}
+      </hh-button>
+      <span id="ShareMessage-{{ section.id }}" class="p share__message hidden" role="status" aria-hidden="true">
+        {{ 'general.share.success_message' | t }}
+      </span>
+    </div>
+  </details>
+</share-button>

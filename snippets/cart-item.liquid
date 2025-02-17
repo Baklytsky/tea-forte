@@ -1,0 +1,104 @@
+<div class="cart-item">
+  <span class="cart-item__media">
+    {% if item.image %}
+      <img class="cart-item__image cover"
+        src="{{ item.image | img_url: '150x' }}"
+        alt="{{ item.image.alt | escape }}"
+        width="120"
+        height="{{ 160 | divided_by: item.image.aspect_ratio | ceil }}"
+      >
+    {% endif %}
+  </span>
+
+  <span class="cart-item__details">
+    {%- if section.settings.show_vendor -%}
+      <p class="c-light">{{ item.product.vendor }}</p>
+    {%- endif -%}
+
+    <a href="{{ item.product.url }}" class="h6 break">{{ item.product.title | escape }}</a>
+
+    {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
+      <dl>
+        {%- if item.product.has_only_default_variant == false -%}
+          {%- for option in item.options_with_values -%}
+            <div class="flex">
+              <dt>{{ option.name }}:</dt>
+              <dd class="ml025 capitalize">{{ option.value }}</dd>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- for property in item.properties -%}
+          {%- assign property_first_char = property.first | slice: 0 -%}
+          {%- if property.last != blank and property_first_char != '_' -%}
+            <div class="flex">
+              <dt>{{ property.first }}:</dt>
+              <dd class="ml025 capitalize">
+                {%- if property.last contains '/uploads/' -%}
+                  <a href="{{ property.last }}" target="_blank">
+                    {{ property.last | split: '/' | last }}
+                  </a>
+                {%- else -%}
+                  {{ property.last }}
+                {%- endif -%}
+              </dd>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </dl>
+
+      <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+    {%- endif -%}
+  </span>
+
+  <span class="cart-item__prices">
+    <div class="cart-item__price-wrapper">
+      {%- if item.original_price != item.final_price -%}
+        <dl class="cart-item__discounted-prices">
+          <dt class="visually-hidden">
+            {{ 'products.product.price.regular_price' | t }}
+          </dt>
+          <dd>
+            <s class="cart-item__old-price">
+              {{ item.original_price | money }}
+            </s>
+          </dd>
+          <dt class="visually-hidden">
+            {{ 'products.product.price.sale_price' | t }}
+          </dt>
+          <dd>
+            {{ item.final_price | money }}
+          </dd>
+        </dl>
+      {%- else -%}
+        <span>
+          {{ item.original_price | money }}
+        </span>
+      {%- endif -%}
+    </div>
+  </span>
+
+  <hh-button theme="tertiary" class="cart-item__remove" href="{{ item.url_to_remove }}" custom:click="removeItem" key="{{ index }}">
+    {{ 'sections.cart.remove' | t }}
+  </hh-button>
+
+  {% comment %} {% liquid
+    assign step = product.metafields.settings.step
+    assign initial = 1
+    if step > 1
+      assign initial = 0
+    endif
+  %}
+  <hh-quantity-input initial="{{ initial }}" label="{{ 'products.product.quantity.label' | t }}" {% if step %}step="{{ step }}"{% endif %} show-label>
+     {% endcomment %}
+  <hh-quantity-input class="cart-item__quantity" initial="{{ item.quantity }}" key="{{ index }}">
+    <button name="minus" type="button" slot="decrease">
+      <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+      {% render 'icon' with 'minus' %}
+    </button>
+    <button name="plus" type="button" slot="increase">
+      <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+      {% render 'icon' with 'plus' %}
+    </button>
+  </hh-quantity-input>
+</div>

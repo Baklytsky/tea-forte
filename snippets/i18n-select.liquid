@@ -1,0 +1,43 @@
+<script type="module">
+  // Simply listens to a change event and submits the form
+  Array.prototype.slice.call(
+    document.body.querySelectorAll('.js-localization-form')
+  ).forEach(form => {
+    form.addEventListener('change', () => {
+      form.submit()
+    })
+  })
+</script>
+
+{%- if type == 'currency' -%}
+  {%- form 'localization', id: 'FooterCountryForm', class: "js-localization-form" -%}
+    {%- capture value -%}{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}){%- endcapture -%}
+    {%- capture options -%}[{% for country in localization.available_countries %}{"label":"{{ country.name | append: ' (' | append: country.currency.iso_code | append: ' ' | append: country.currency.symbol | append: ')'}}", "value":"{{ country.iso_code }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture -%}
+    {%- assign label = 'localization.country_label' | t -%}
+    {% render 'input',
+      type: 'custom-select',
+      name: 'country_code',
+      value: value,
+      label: label,
+      options: options,
+      active: localization.country.iso_code
+    %}
+  {%- endform -%}
+{%- endif -%}
+
+{%- if type == 'language' -%}
+  {%- form 'localization', id: 'FooterLanguageForm', class: "js-localization-form"  -%}
+    {%- capture value -%}{{ localization.language.endonym_name | capitalize }}{%- endcapture -%}
+    {%- capture options -%}[{% for language in localization.available_languages %}{"label":"{{ language.endonym_name | capitalize }}", "value":"{{ language.iso_code }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture -%}
+    {%- assign label = 'localization.language_label' | t -%}
+    {% render 'input',
+      type: 'custom-select',
+      name: 'locale_code',
+      value: value,
+      label: label,
+      options: options,
+      lang: true,
+      active: localization.language.iso_code
+    %}
+    {%- endform -%}
+{%- endif -%}

@@ -1,0 +1,99 @@
+.thumbnail__icon {
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  background-color: var(--hh-color-background);
+  border-radius: 50%;
+  border: 0.1rem solid var(--hh-color-light);
+  color: var(--hh-color-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.thumbnail__icon > svg {
+  width: 1.2rem;
+  height: 1.4rem;
+}
+
+.thumbnail__deferred-media > * {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.thumbnail__overlay-toggle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+.thumbnail__deferred-poster {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail__deferred-poster > img {
+  width: auto;
+  height: 100%;
+}
+
+.thumbnail__deferred-poster-button {
+  background-color: var(--hh-color-background);
+  border: 0.1rem solid var(--hh-color-light);
+  border-radius: 50%;
+  color: var(--hh-color-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6.2rem;
+  width: 6.2rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--hh-duration-short) ease,
+    color var(--hh-duration-short) ease;
+  z-index: 1;
+}
+
+.thumbnail__deferred-poster-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.thumbnail__deferred-poster-button > svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.thumbnail__deferred-poster-button > svg.icon-play {
+  margin-left: 0.2rem;
+}
+
+/* @todo port to web component */
+.deferred-media[loaded] > .thumbnail__deferred-poster {
+  display: none;
+}

@@ -1,0 +1,35 @@
+.header-search__form {
+  width: 100%;
+}
+
+.header-search__field {
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--hh-color-night);
+}
+
+.header-search__input {
+  width: 100%;
+  flex: 1;
+  border: none;
+}
+
+.header-search__label {
+  display: block;
+  margin-bottom: 2rem;
+  color: var(--hh-color-subdued);
+}
+
+.header-search__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem;
+  width: 4.4rem;
+  background-color: transparent;
+  border: none;
+}
+
+.header-search__close svg {
+  width: 1.7rem;
+  height: 1.7rem;
+}

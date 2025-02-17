@@ -1,0 +1,126 @@
+{%- liquid
+  render 'async-stylesheet', url: 'section-main-collection-product-grid.css'
+  render 'async-stylesheet', url: 'component-card.css'
+  render 'async-stylesheet', url: 'component-badge.css'
+  render 'async-stylesheet', url: 'snippet-price.css'
+-%}
+
+{% capture overlay %}
+<div class="product-grid__overlay">
+  <div class="product-grid__overlay__spinner">
+    <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+    </svg>
+  </div>
+</div>
+{% endcapture %}
+
+<div id="CollectionProductGrid">
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    {%- if collection.products.size == 0 -%}
+      <div class="product-grid product-grid--empty container js-product-grid" id="main-collection-product-grid" data-id="{{ section.id }}">
+        {{ overlay }}
+
+        <p class="product-grid__count c-neutral" role="status">
+          {{ 'sections.collection_template.product_count' | t: product_count: collection.products_count, count: collection.all_products_count }}
+        </p>
+
+        <div class="product-grid__title center">
+          <h2 class="h4">
+            {{ 'sections.collection_template.empty' | t }}<br>
+            {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underline" }}
+          </h2>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="product-grid container js-product-grid">
+        {{ overlay }}
+
+        <p class="collection-product-count light" role="status">
+          {{ 'sections.collection_template.product_count' | t: product_count: collection.products_count, count: collection.all_products_count }}
+        </p>
+
+        <ul id="main-collection-product-grid" data-id="{{ section.id }}" class="
+          gf gf2
+          {% if collection.products_count < 4 %} gf{{ collection.products_count }}--md{% else %}
+            {% if collection.products_count == 4 %} gf4--lg{% else %} gf3--md gf4--lg{% endif %}
+          {% endif %}">
+          {%- for product in collection.products -%}
+            <li class="gfi">
+              {% render 'product-card',
+                product_card_product: product,
+                media_size: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                add_image_padding: section.settings.add_image_padding,
+                show_vendor: section.settings.show_vendor
+              %}
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate, anchor: '', class: '' %}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+    }
+  ]
+}
+{% endschema %}

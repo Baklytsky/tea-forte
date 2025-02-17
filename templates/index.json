@@ -1,0 +1,272 @@
+{
+  "sections": {
+    "fcf40f4a-0020-46e0-9f76-fa760435bb8c": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16646947635448__fcf40f4a-0020-46e0-9f76-fa760435bb8c-1671217355b9d5014d-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Lorem ipsum dolor sit amet"
+          }
+        },
+        "template--16646947635448__fcf40f4a-0020-46e0-9f76-fa760435bb8c-1671217355b9d5014d-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <\/p>"
+          }
+        },
+        "template--16646947635448__fcf40f4a-0020-46e0-9f76-fa760435bb8c-1671217355b9d5014d-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "VIEW OUR POLICIES",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16646947635448__fcf40f4a-0020-46e0-9f76-fa760435bb8c-1671217355b9d5014d-0",
+        "template--16646947635448__fcf40f4a-0020-46e0-9f76-fa760435bb8c-1671217355b9d5014d-1",
+        "template--16646947635448__fcf40f4a-0020-46e0-9f76-fa760435bb8c-1671217355b9d5014d-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/tea-forte-main-image.jpg",
+        "height": "adapt",
+        "heading_color": "secondary",
+        "layout": "image_first"
+      }
+    },
+    "faa7e56d-d2ed-4db6-9bde-d43d0773919f": {
+      "type": "collection-list-slider",
+      "blocks": {
+        "template--16649070641400__faa7e56d-d2ed-4db6-9bde-d43d0773919f-16715011642dcddad9-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-chests"
+          }
+        },
+        "template--16649070641400__faa7e56d-d2ed-4db6-9bde-d43d0773919f-16715011642dcddad9-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "pyramid"
+          }
+        },
+        "template--16649070641400__faa7e56d-d2ed-4db6-9bde-d43d0773919f-16715011642dcddad9-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gourmet-tea-loose-leaf-tea-blends"
+          }
+        },
+        "ed4f8b5a-9ec6-4585-9d0b-384d15be37df": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "single-steeps"
+          }
+        },
+        "49a6e1fa-577d-4adc-9d0c-103d408070f7": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-gifts-customizable-gifts"
+          }
+        },
+        "345fa74b-9214-42e5-b8b3-994c165414a2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-gifts-fleur-gifts"
+          }
+        },
+        "019bc4ab-0b53-4ae5-bf0d-013e030d6539": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-gifts-for-mom"
+          }
+        },
+        "f75adbbd-abec-4d4a-bad5-b84bbbeddb76": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gifts-under-50"
+          }
+        },
+        "99bfb28d-f5ad-4785-905f-5ee8a4464d3b": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tea-gifts-for-dad"
+          }
+        }
+      },
+      "block_order": [
+        "template--16649070641400__faa7e56d-d2ed-4db6-9bde-d43d0773919f-16715011642dcddad9-0",
+        "template--16649070641400__faa7e56d-d2ed-4db6-9bde-d43d0773919f-16715011642dcddad9-1",
+        "template--16649070641400__faa7e56d-d2ed-4db6-9bde-d43d0773919f-16715011642dcddad9-2",
+        "ed4f8b5a-9ec6-4585-9d0b-384d15be37df",
+        "49a6e1fa-577d-4adc-9d0c-103d408070f7",
+        "345fa74b-9214-42e5-b8b3-994c165414a2",
+        "019bc4ab-0b53-4ae5-bf0d-013e030d6539",
+        "f75adbbd-abec-4d4a-bad5-b84bbbeddb76",
+        "99bfb28d-f5ad-4785-905f-5ee8a4464d3b"
+      ],
+      "settings": {
+        "title": "Categories",
+        "image_ratio": "portrait",
+        "color_scheme": "background-1",
+        "swipe_on_mobile": false,
+        "image_padding": false,
+        "show_view_all": false
+      }
+    },
+    "7b92aae6-c31a-4b30-9f6e-aba1e248c690": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New products",
+        "collection": "new-products",
+        "image_ratio": "adapt"
+      }
+    },
+    "1ceb6bb1-65f7-48d3-8e38-28997133a1b7": {
+      "type": "cta-image-banner",
+      "blocks": {
+        "template--16646947635448__1ceb6bb1-65f7-48d3-8e38-28997133a1b7-167121740803374ca9-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Want to reorder?"
+          }
+        },
+        "template--16646947635448__1ceb6bb1-65f7-48d3-8e38-28997133a1b7-167121740803374ca9-2": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "VIEW ORDER HISTORY",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16646947635448__1ceb6bb1-65f7-48d3-8e38-28997133a1b7-167121740803374ca9-0",
+        "template--16646947635448__1ceb6bb1-65f7-48d3-8e38-28997133a1b7-167121740803374ca9-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/wholesale-reorder-banner.jpg",
+        "desktop_text_box_position": "center",
+        "color_scheme": "background-1",
+        "stack_images_on_mobile": true,
+        "adapt_height_first_image": false
+      }
+    },
+    "5e117a63-6f74-4a61-999a-b1f70396f300": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Best sellers",
+        "collection": "new-products",
+        "image_ratio": "adapt"
+      }
+    },
+    "99d100a4-0def-4616-abdc-b5e9ec5ae918": {
+      "type": "multicolumn-grid",
+      "blocks": {
+        "template--16646947635448__99d100a4-0def-4616-abdc-b5e9ec5ae918-16712171741cc17e7c-0": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ZakuroTeaCupAndSet.jpg",
+            "title": "OUR RECYCLING PROGRAM",
+            "text": "",
+            "button_label_1": "Learn More",
+            "button_link_1": ""
+          }
+        },
+        "template--16646947635448__99d100a4-0def-4616-abdc-b5e9ec5ae918-16712171741cc17e7c-1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/TeaNotesMenu_600x400__GiftBaskets.jpg",
+            "title": "ARTICLES & RECIPES",
+            "text": "",
+            "button_label_1": "Learn More",
+            "button_link_1": ""
+          }
+        },
+        "template--16646947635448__99d100a4-0def-4616-abdc-b5e9ec5ae918-16712171741cc17e7c-2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/TF_L_PumpkinSpice_PPB_0984_General_Desktop_1440x1120_de7efae0-9356-4f94-be4e-1817498048e5.jpg",
+            "title": "TEA HEALTH & BENEFITS",
+            "text": "",
+            "button_label_1": "Learn More",
+            "button_link_1": ""
+          }
+        },
+        "c9e1a24b-438e-47ac-8269-3085c3b15b30": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/YUNOMI_TEA_CUPS-400x430_1_03a7dc1a-b379-477c-abb0-f7961c631b61.jpg",
+            "title": "FAQS",
+            "text": "",
+            "button_label_1": "Learn More",
+            "button_link_1": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16646947635448__99d100a4-0def-4616-abdc-b5e9ec5ae918-16712171741cc17e7c-0",
+        "template--16646947635448__99d100a4-0def-4616-abdc-b5e9ec5ae918-16712171741cc17e7c-1",
+        "template--16646947635448__99d100a4-0def-4616-abdc-b5e9ec5ae918-16712171741cc17e7c-2",
+        "c9e1a24b-438e-47ac-8269-3085c3b15b30"
+      ],
+      "settings": {
+        "title": "",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "swipe_on_mobile": true
+      }
+    },
+    "513134fc-3739-4fdc-b957-d868cfe46573": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16646947635448__513134fc-3739-4fdc-b957-d868cfe46573-1671217355b9d5014d-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "THE ULTIMATE  TEA EXPERIENCE"
+          }
+        },
+        "template--16646947635448__513134fc-3739-4fdc-b957-d868cfe46573-1671217355b9d5014d-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tea Forté’s pyramid infuser is an elegant signature of our brand. Unwrap, steep and reveal the exquisite nature of the whole leaf teas, herbs, fruits and flowers within. Each handcrafted infuser is designed to allow the blends to luxuriantly unfurl into each deliciously aromatic cup.<\/p><p><\/p><p>Tea Forté’s signature pyramid infusers are made from lab tested, FDA approved, food grade, recyclable PET and handcrafted into pyramid shape without the use of any chemical additives, colorants or adhesives. Our signature pyramid infuser complies with FDA’s safe for food contact packaging specifications and does not contain gluten or GMOs.<\/p>"
+          }
+        },
+        "template--16646947635448__513134fc-3739-4fdc-b957-d868cfe46573-1671217355b9d5014d-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "LEARN MORE",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16646947635448__513134fc-3739-4fdc-b957-d868cfe46573-1671217355b9d5014d-0",
+        "template--16646947635448__513134fc-3739-4fdc-b957-d868cfe46573-1671217355b9d5014d-1",
+        "template--16646947635448__513134fc-3739-4fdc-b957-d868cfe46573-1671217355b9d5014d-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/tea-experience.jpg",
+        "height": "adapt",
+        "heading_color": "primary",
+        "layout": "text_first"
+      }
+    }
+  },
+  "order": [
+    "fcf40f4a-0020-46e0-9f76-fa760435bb8c",
+    "faa7e56d-d2ed-4db6-9bde-d43d0773919f",
+    "7b92aae6-c31a-4b30-9f6e-aba1e248c690",
+    "1ceb6bb1-65f7-48d3-8e38-28997133a1b7",
+    "5e117a63-6f74-4a61-999a-b1f70396f300",
+    "99d100a4-0def-4616-abdc-b5e9ec5ae918",
+    "513134fc-3739-4fdc-b957-d868cfe46573"
+  ]
+}

@@ -1,0 +1,17 @@
+{% capture verbiage %}
+  {%- case status -%}
+    {%- when 0 -%}
+      This is broken, and known to be broken. This has come to fruition by iterating and not having had the chance to come back to this template and ensure that it works with other global or complementary changes.
+    {%- when 1 -%}
+      This is essentially untouched and unvalidated. Come into the development of this scope expecting some things to not work, a fair bit to be delete and the scaffold to shave a few basis points of development time.
+    {%- when 2 -%}
+      We've done an initial pass at this template and felt good enough to use it for future project. It's not perfect and some work is still required. It'd be great for any discovered issues or improvements to be rolled back into this template.
+    {%- when 3 -%}
+      This is pretty strong. We've look extensively at the CSS, JS and HTML to make a solid base framework. If you use it, try and not completely re-engineer it but rather understanding the language of the work and iterate on it as you see fit.
+  {%- endcase -%}
+{% endcapture %}
+
+<div class="container container--narrow px2 bg-light rounded mv2">
+  <h5 class="utility mx0 mb1 uppercase c-{% if status <= 1 %}danger{% else %}success{% endif %}">Status</h5>
+  {{ verbiage | escape }}
+</div>

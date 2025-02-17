@@ -1,0 +1,117 @@
+{%- render 'async-stylesheet', url: 'section-main-collection-filters.css' -%}
+
+<script src="{{ 'component-filters-wrapper.js' | asset_url }}" defer="defer" type="module"></script>
+
+{%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+
+<div class="collection-filters container" id="main-collection-filters" data-id="{{ section.id }}">
+  {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+    {%- assign total_active_values = 0 -%}
+    <hh-filters-wrapper class="block hidden--sm">
+      <form id="CollectionFiltersForm" class="collection-filters__form">
+        {% if section.settings.enable_filtering %}
+          <div class="flex fw">
+            {%- unless collection.filters == empty -%}
+              <p class="p2 w1 mt0 mb025">{{ 'sections.collection_template.filter_by_label' | t }}</p>
+            {%- endunless -%}
+
+            {%- for filter in collection.filters -%}
+            {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+              {% render 'filter', filter: filter, index: forloop.index %}
+            {%- endfor -%}
+            <noscript>
+              <button type="submit" class="facets__button">{{ 'sections.collection_template.filter_button' | t }}</button>
+            </noscript>
+          </div>
+
+          {%- capture active_facets -%}
+            <a href="{{ collection.url }}?sort_by={{ sort_by }}" class="collection-filters__facet-button js-facet-remove">
+              <span class="collection-filters__facet-button-inner">{{ 'sections.collection_template.clear_all' | t }}</span>
+            </a>
+            {%- for filter in collection.filters -%}
+              {%- for value in filter.active_values -%}
+                <a class="collection-filters__facet-button collection-filters__facet-button--light js-facet-remove" href="{{ value.url_to_remove }}">
+                  <span class="collection-filters__facet-button-inner">
+                    {{ value.label | escape }}
+                    {% render 'icon' with 'close-small' %}
+                  </span>
+                </a>
+              {%- endfor -%}
+              {% if filter.type == "price_range" %}
+                {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                  <a class="collection-filters__facet-button collection-filters__facet-button--light js-facet-remove" href="{{ filter.url_to_remove }}">
+                    <span class="collection-filters__facet-button-inner">
+                      {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}{{ 0 | money }}{%- endif -%}-{%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}{{ filter.range_max | money }}{%- endif -%}
+                      {% render 'icon' with 'close-small' %}
+                    </span>
+                  </a>
+                {%- endif -%}
+              {% endif %}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          <div class="collection-filters__facets hidden--sm js-facets--desktop">
+            {{ active_facets }}
+          </div>
+        {% endif %}
+
+        {% if collection.current_vendor or collection.current_type %}
+          <input type="hidden" name="q" value="{{ collection.current_vendor }}{{ collection.current_type }}">
+        {% endif %}
+
+        {%- if section.settings.enable_sorting -%}
+          <div class="flex{% if section.settings.enable_filtering %} jce{% endif %}">
+            <div class="collection-filters__sort-container w1">
+              <hh-input-wrapper icon='right' animation='none' label="stacked">
+                {%- assign label = 'sections.collection_template.sort_by_label' | t -%}
+                {%- capture options -%}
+                  {%- for option in collection.sort_options -%}
+                    <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                  {%- endfor -%}
+                {%- endcapture -%}
+                {%- render 'input',
+                  type: 'select',
+                  id: 'SortBy',
+                  name: 'sort_by',
+                  label: label,
+                  options: options
+                -%}
+              </hh-input-wrapper>
+            </div>
+            <noscript>
+              <button type="submit">{{ 'sections.collection_template.sort_button' | t }}</button>
+            </noscript>
+          </div>
+        {%- endif -%}
+      </form>
+    </hh-filters-wrapper>
+
+    {% render 'mobile-filters' %}
+
+    <div class="collection-filters__facets js-facets--mobile hidden--md hidden--lg">
+      {{ active_facets }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-filters.name",
+  "class": "spaced-section spaced-section--md",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    }
+  ]
+}
+{% endschema %}

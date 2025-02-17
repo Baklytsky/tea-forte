@@ -1,0 +1,49 @@
+{%- liquid
+  render 'async-stylesheet', url: 'section-inline-cart.css'
+  render 'async-stylesheet', url: 'snippet-cart-item.css'
+-%}
+
+<script src="{{ '-component-quantity-input.min.js' | asset_url }}" type="module"></script>
+<script src="{{ '-component-inline-cart.min.js' | asset_url }}" type="module"></script>
+
+<hh-inline-cart class="inline-cart">
+  <div slot="body" class="container">
+    <div data-rerender>
+      {%- if cart != empty -%}
+        <h2 class="h4">{{ "cart.general.title" | t }}</h2>
+        <form action="{{ routes.cart_url }}" method="post">
+          <div>
+            {%- if cart != empty -%}
+              {%- for item in cart.items -%}
+                {%- render 'cart-item' with item: item, index: forloop.index -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+          <ul class="mt2">
+            <li class="flex jcb">
+              <h6 class="h6">{{ 'cart.general.subtotal' | t }}</h6>
+              <h6 class="h6">{{- cart.total_price | money -}}</h6>
+            </li>
+          </ul>
+          <div class="mt2 pt2 right border-top">
+            <hh-button-wrapper theme="primary" class="mt2">
+              <button type="submit" value="submit" name="checkout">{{ 'sections.cart.checkout' | t }}</button>
+            </hh-button-wrapper>
+            <p class="p">{{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t }}</p>
+          </div>
+        </form>
+      {%- else -%}
+        <div class="mv2 center">
+          <h2 class="h6">{{ 'sections.cart.empty' | t }}</h2>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</hh-inline-cart>
+
+{% schema %}
+{
+  "name": "inline-cart",
+  "blocks": []
+}
+{% endschema %}

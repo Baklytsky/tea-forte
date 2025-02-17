@@ -1,0 +1,68 @@
+<div id="CustomerLoginForm">
+  <a href="/" class="header__heading-link">
+    <img src="//cdn.shopify.com/s/files/1/0634/2983/7048/files/logo-min.png?v=1671043449" alt="Tea Forte Wholesale">
+  </a>
+  <h1 id="login" tabindex="-1" class="h4">{{ 'customer.login_page.title' | t }}</h1>
+  <p>{{ 'customer.login_page.subtitle' | t }}</p>
+  <div>
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {% unless template.name == 'register' %}
+        {%- if form.errors -%}
+          <div class="mb1 bg-light px1 rounded">
+            <h2 class="flex utility aic" tabindex="-1" autofocus>
+              <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
+              <span style="width: 20px" class="mr05">{% render 'icon' with 'error' %}</span>
+              {{ 'templates.contact.form.error_heading' | t }}
+            </h2>
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+      {% endunless %}
+
+      <hh-input-wrapper class="mb1">
+        {%- assign label = 'customer.login_page.email' | t -%}
+        {%- render 'input',
+          type: 'email',
+          id: 'CustomerEmail',
+          name: 'customer[email]',
+          label: label,
+          required: true
+        -%}
+      </hh-input-wrapper>
+
+      {%- if form.password_needed -%}
+      <hh-input-wrapper class="mb1">
+        {%- assign label = 'customer.login_page.password' | t -%}
+        {%- render 'input',
+          type: 'password',
+          id: 'CustomerPassword',
+          name: 'customer[password]',
+          label: label,
+          required: true
+        -%}
+      </hh-input-wrapper>
+      {%- endif -%}
+
+      <hh-button-wrapper theme="primary">
+        <button type="submit uppercase">
+          {{ 'customer.login_page.submit' | t }}
+        </button>
+      </hh-button>
+
+      <p class="account--title">{{ 'customer.login_page.forgot_password' | t }}</p>
+      <a class="account--link" href="#" onclick="showRecoverPasswordForm();return false;">
+        {{ 'customer.login_page.change_password_link_text' | t }}
+      </a>
+
+      <p class="account--title">{{ 'customer.login_page.request_access_text' | t }}</p>
+      <a class="account--link" href="{{ settings.request_access_link }}">
+        {{ 'customer.login_page.request_access_link_text' | t }}
+      </a>
+
+      <p class="account--title">{{ 'customer.login_page.new_wholesale_customer_text' | t }}</p>
+      <a class="account--link" href="{{ settings.new_wholesale_customer_link }}">
+        {{ 'customer.login_page.new_wholesale_customer_link_text' | t }}
+      </a>
+    {%- endform -%}
+  </div>
+</div>

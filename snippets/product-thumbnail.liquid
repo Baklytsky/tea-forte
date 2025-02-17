@@ -1,0 +1,102 @@
+{% render 'async-stylesheet', url: 'snippet-product-thumbnail.css' %}
+
+<script src="{{ 'component-deferred-media.js' | asset_url }}" type="module" defer></script>
+
+{%- if ctx != 'modal' -%}
+<noscript>
+  {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+    <a class="relative" href="{% if media.media_type == 'video' %}{{ media.sources[1].url }}{% else %}{{ media | external_video_url }}{% endif %}" aria-label="{{ 'products.product.video_exit_message' | t: title: product.title | escape }}">
+      <span class="thumbnail__icon">
+        {% render 'icon' with 'play' %}
+      </span>
+      {%- render 'image', 
+        container: true, 
+        image: media.preview_image
+        sizes: '(min-width: 1200px) 75vw, (min-width: 750px) 50vw, 1000vw'
+      -%}
+    </a>
+  {%- else -%}
+    {%- render 'image', 
+      container: true,
+      image: media.preview_image
+      sizes: '(min-width: 1200px) 75vw, (min-width: 750px) 50vw, 1000vw'
+    -%}
+  {%- endif -%}
+</noscript>
+
+{% if media.media_type == 'image' %}
+<hh-broadcast on="click" event="modal" data='{"id": "{{ modal_id }}", "element": "{{ media.id }}"}' aria-haspopup="dialog">
+{% endif %}
+
+<div class="{% if media.media_type != 'image' %}hidden--md hidden--lg{% endif %} zoom-in no-js-hidden js-show-modal relative">
+  <span class="thumbnail__icon" aria-hidden="true">
+    {%- liquid
+      case media.media_type
+        when 'video' or 'external_video'
+          render 'icon' with 'play'
+        when 'model'
+          render 'icon' with '3d-model'
+        else
+          render 'icon' with 'zoom'
+      endcase
+    -%}
+  </span>
+  {%- render 'image', 
+    container: true,
+    image: media.preview_image
+    sizes: '(min-width: 1200px) 75vw, (min-width: 750px) 50vw, 1000vw'
+  -%}
+  <button class="{% if media.media_type == 'image' %}zoom-in{% else %}pointer{% endif %} thumbnail__overlay-toggle" type="button">
+    <span class="visually-hidden">
+      {%- if position == 'featured' %}
+        {{ 'products.product.media.open_featured_media' | t }}
+      {%- else -%}
+        {{ 'products.product.media.open_media' | t: index: position }}
+      {%- endif -%}
+    </span>
+  </button>
+</div>
+
+{% if media.media_type == 'image' %}
+</hh-broadcast>
+{% endif %}
+
+{%- endif -%}
+
+{%- if media.media_type != 'image' -%}
+  {%- if media.media_type == 'model' -%}
+    {% render '3d-elements', 
+      render: 'deferred-model', 
+      media: product.media, 
+      item: media 
+    %}
+  {%- else -%}
+    <deferred-media class="thumbnail__deferred-media media hidden--sm overflow-hidden no-js-hidden" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%" data-media-id="{{ media.id }}">
+      <button class="thumbnail__deferred-poster" type="button" id="Deferred-Poster-Modal-{{ media.id }}">
+        <span class="thumbnail__deferred-poster-button motion-reduce">
+          <span class="visually-hidden">{{ 'products.product.media.play_video' | t }}</span>
+          {%- render 'icon' with 'play' -%}
+        </span>
+        {%- render 'image', 
+          image: media.preview_image
+          sizes: '(min-width: 1200px) 75vw, (min-width: 750px) 50vw, 1000vw'
+        -%}
+      </button>
+      <template>
+        {%- liquid
+          case media.media_type
+          when 'external_video'
+            assign video_class = 'js-' | append: media.host
+            if media.host == 'youtube'
+              echo media | external_video_url: autoplay: true, loop: loop, playlist: media.external_id | external_video_tag: class: video_class, loading: "lazy"
+            else
+              echo media | external_video_url: autoplay: true, loop: loop | external_video_tag: class: video_class, loading: "lazy"
+            endif
+          when 'video'
+            echo media | media_tag: image_size: "2048x", autoplay: true, loop: loop, controls: true, preload: "none", autoplay: true
+          endcase
+        -%}
+      </template>
+    </deferred-media>
+  {%- endif -%}
+{%- endif -%}

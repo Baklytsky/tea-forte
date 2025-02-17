@@ -1,0 +1,347 @@
+/* Main Header Layout */
+hh-header {
+  display: block;
+  padding: 5px 0;
+}
+
+.header-wrapper {
+  display: block;
+  position: relative;
+  background-color: var(--hh-color-background);
+}
+
+.header {
+  display: grid;
+  grid-template-areas: 'navigation heading icons';
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.header *[tabindex='-1']:focus {
+  outline: none;
+}
+
+.header__heading {
+  margin: 0;
+  line-height: 0;
+}
+
+.header > .header__heading-link {
+  line-height: 0;
+}
+
+.header__heading,
+.header__heading-link {
+  grid-area: heading;
+  justify-self: center;
+}
+
+.header__heading-link {
+  display: inline-block;
+  margin-right: auto;
+  padding: 0.75rem;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.header__heading-link .h2 {
+  line-height: 1;
+  color: var(--hh-color-neutral);
+}
+
+.header__heading-logo {
+  height: auto;
+  width: 290px;
+  max-width: 122px;
+}
+
+.header__utility {
+  align-items: center;
+  display: flex;
+  grid-area: icons;
+  justify-self: end;
+}
+
+.header__utility .header__utility-account {
+  display: none;
+}
+
+.header__utility__link {
+  margin-right: 12px;
+}
+
+.header__overlay {
+  position: absolute;
+  top: 19rem;
+  width: 100%;
+  left: 0;
+  height: 300px;
+  background: var(--hh-color-background);
+  box-shadow: 0px 63.4px 25.3rem rgba(0, 0, 0, 0.01),
+    0 35.6rem 21.4rem rgba(0, 0, 0, 0.05), 0 15.8rem 15.8rem rgba(0, 0, 0, 0.09),
+    0 4rem 8.7rem rgba(0, 0, 0, 0.1), 0 0 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s opacity, 0.3s visibility, 0.3s height;
+}
+
+.header__overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.header__menu-link span {
+  position: relative;
+}
+
+.header__menu-link span::after {
+  content: '';
+  position: absolute;
+  height: 1px;
+  transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) 0s;
+  right: 0;
+  width: 0;
+  bottom: -0.4rem;
+  background-color: var(--hh-color-gold);
+}
+
+.header__menu-link--parent span::after {
+  height: 2px;
+}
+
+details[opening] .header__menu-link--parent span::after,
+.header__menu-link:hover span::after {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+
+@media screen and (min-width: 990px) {
+  hh-header {
+    padding: 23px 0 0;
+  }
+
+  .header {
+    grid-template-columns: 2fr 1fr 2fr;
+  }
+
+  .header__heading {
+    justify-self: flex-start;
+  }
+
+  .header__heading-logo {
+    height: auto;
+    max-width: 153px;
+  }
+
+  .header__utility .header__utility-account {
+    display: inline-flex;
+  }
+
+  .header__utility > * {
+    margin-right: 2.4rem;
+  }
+
+  .header__utility > *:last-child {
+    margin-right: 0;
+  }
+}
+
+/* Header menu */
+.header__inline-menu {
+  margin-left: -1.2rem;
+  grid-area: navigation;
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .header__inline-menu {
+    display: block;
+  }
+}
+
+.header__menu {
+  padding: 0 1rem;
+}
+
+.header__menu-item {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: var(--hh-color-text);
+}
+
+.header__menu-item svg {
+  position: absolute;
+  height: 0.6rem;
+  right: 0.8rem;
+  top: calc(50% - 0.35rem);
+}
+
+.header__menu-item--parent {
+  padding-right: 2.7rem;
+}
+
+.header__submenu {
+  transition: opacity var(--hh-duration-default) ease,
+    transform var(--hh-duration-default) ease;
+}
+
+.header__submenu--child {
+  padding-top: 2rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s opacity, 0.3s visibility;
+}
+
+details[opening] > .header__submenu--child {
+  opacity: 1;
+  visibility: visible;
+}
+
+.header__submenu--child-content {
+  display: flex;
+  padding: 3rem 70px;
+}
+
+.header__submenu--parents {
+  min-width: 24rem;
+  border-right: 1px solid;
+}
+
+.header__submenu--item {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.8rem 1rem;
+  display: inline-block;
+  transition: 0.3s background, 0.3s color;
+}
+
+.header__submenu--parents-item ~ .header__submenu--parents-item {
+  margin-top: 2rem;
+}
+
+.header__submenu--children {
+  width: 100%;
+  position: relative;
+}
+
+.header__submenu--children-group {
+  display: flex;
+  gap: 6rem;
+  padding-left: 6rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s opacity, 0.2s visibility;
+}
+
+.header__submenu--children-group.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.header__submenu--children-item ~ .header__submenu--children-item {
+  margin-top: 2rem;
+}
+
+.header__submenu--item.active,
+.header__submenu--item:hover {
+  background: var(--hh-color-gold);
+  color: var(--hh-color-day);
+}
+
+.header__submenu--child-content
+  ul
+  .header__submenu-list--child:first-of-type
+  a {
+  padding-left: 0;
+}
+
+.header__submenu-list--child > a {
+  font-weight: bold;
+}
+
+.header__submenu--child .header__submenu {
+  display: flex;
+  flex: 1;
+}
+
+.header__submenu--grandchild {
+  flex-direction: column;
+}
+
+.header__submenu .header__menu-item:after {
+  right: 2rem;
+}
+
+.header__submenu .header__menu-item {
+  padding: 0.95rem 3.5rem 0.95rem 2rem;
+}
+
+.header__menu-item .icon-caret {
+  right: 0.8rem;
+}
+
+.header__submenu .icon-caret {
+  right: 2rem;
+}
+
+.header__product-card {
+  max-width: 180px;
+}
+
+.header__search {
+  display: flex;
+  justify-content: center;
+  grid-area: search;
+}
+
+.header__search__bar {
+  box-sizing: content-box;
+  width: 100vw;
+  max-width: calc(100vw - 70px);
+}
+
+.header__search--mobile {
+  margin-top: 32px;
+}
+
+.header__search--desktop {
+  display: none;
+}
+
+.header__search--desktop .header__search__bar {
+  border: 1px solid var(--hh-color-blue-grey-2);
+  width: 435px;
+}
+
+@media screen and (min-width: 990px) {
+  .header {
+    grid-template-areas:
+      'heading search icons'
+      'navigation navigation navigation';
+  }
+
+  .header__search--mobile {
+    display: none;
+  }
+
+  .header__search--desktop {
+    display: flex;
+  }
+
+  .header__search {
+    padding: 4.1rem 0 3.1rem;
+  }
+}

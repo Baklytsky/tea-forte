@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="{{ 'snippet-mobile-menu.css' | asset_url }}">
+
+<hh-details-modal class="mobile-menu" lock-height="true" animation="300">
+  <span slot="summary" class="mobile-menu__icon" aria-label="{{ 'sections.header.menu' | t }}">
+    {% render 'icon' with 'hamburger' %}
+    {% render 'icon' with 'close' %}
+  </span>
+  <div slot="details" class="mobile-menu__container">
+    <div class="bg-day w1">
+      <div class="relative flex fdc jcb h1">
+        <nav class="mobile-menu__navigation h1">
+          <ul class="mobile-menu__menu h1">
+            {%- for link in mod_menu.links -%}
+              <li>
+                {%- if link.links != blank -%}
+                  <!-- Parent link with children -->
+                  <details>
+                    <summary class="mobile-menu__menu-item mobile-menu__menu-item--parent {% if link.child_active %} mobile-menu__menu-item--active{% endif %}">
+                      {{ link.title | escape }}
+                      {% render 'icon' with 'caret' %}
+                    </summary>
+                    <div id="link-{{ link.title | escape }}" class="mobile-menu__submenu mobile-menu__submenu--child h1" tabindex="-1">
+                      <div class="mobile-menu__inner-submenu h1">
+                        <ul class="mobile-menu__menu h1" tabindex="-1">
+                          <li>
+                            <a href="#" class="mobile-menu__menu-item mobile-menu__menu-item--back js-details-trigger">
+                              {% render 'icon' with 'caret' %}
+                              <span class="w1 center">
+                                {{ link.title | escape }}
+                              </span>
+                            </a>
+                          </li>
+                          {%- for childlink in link.links -%}
+                            <!-- Child link -->
+                            <li>
+                              {%- if childlink.links == blank -%}
+                                <a href="{{ childlink.url }}" class="mobile-menu__menu-item mobile-menu__menu-item--child{% if childlink.current %} mobile-menu__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                  {{ childlink.title | escape }}
+                                </a>
+                              {%- else -%}
+                                <details>
+                                  <summary class="mobile-menu__menu-item mobile-menu__menu-item--parent">
+                                    {{ childlink.title | escape }}
+                                    {% render 'icon' with 'caret' %}
+                                  </summary>
+                                  <div id="childlink-{{ childlink.title | escape }}" class="mobile-menu__submenu  h1 mobile-menu__submenu--grandchild">
+                                    <ul class="mobile-menu__menu" tabindex="-1">
+                                      <li>
+                                        <a href="#" class="mobile-menu__menu-item mobile-menu__menu-item--back js-details-trigger">
+                                          {% render 'icon' with 'caret' %}
+                                          <span class="w1 center">
+                                            {{ childlink.title | escape }}
+                                          </span>
+                                        </a>
+                                      </li>
+                                      {%- for grandchildlink in childlink.links -%}
+                                        <li>
+                                          <a href="{{ grandchildlink.url }}" class="mobile-menu__menu-item mobile-menu__menu-item--grandchild{% if grandchildlink.current %} mobile-menu__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                            {{ grandchildlink.title | escape }}
+                                          </a>
+                                        </li>
+                                      {%- endfor -%}
+                                    </ul>
+                                  </div>
+                                </details>
+                              {%- endif -%}
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
+                {%- else -%}
+                  <!-- Parent link without children -->
+                  <a href="{{ link.url }}" class="mobile-menu__menu-item{% if link.current %} mobile-menu__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+                    {{ link.title | escape }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+        <div class="mobile-menu__utility-links">
+          {%- if shop.customer_accounts_enabled -%}
+            <a class="mobile-menu__menu-item" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" >
+              {%- liquid
+                if customer
+                  echo 'customer.account_fallback' | t
+                else
+                  echo 'customer.log_in' | t
+                endif
+              -%}
+            </a>
+            {%- if customer -%}
+              <a class="mobile-menu__menu-item" href="{{ routes.account_url }}">
+                {{- 'customer.orders.title' | t -}}
+              </a>
+              <a class="mobile-menu__menu-item mobile-menu__menu-item--logout" href="{{ routes.account_logout_url }}">
+                {{- 'customer.log_out' | t -}}
+                {% render 'icon' with 'arrow' %}
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</hh-details-modal>

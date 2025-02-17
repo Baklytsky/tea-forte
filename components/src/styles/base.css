@@ -1,0 +1,53 @@
+.no-js:not(html) {
+  display: none !important;
+}
+
+html.no-js .no-js:not(html) {
+  display: block !important;
+}
+
+.no-js-inline {
+  display: none !important;
+}
+
+html.no-js .no-js-inline {
+  display: inline-block !important;
+}
+
+html.no-js .no-js-hidden {
+  display: none !important;
+}
+
+hr {
+  border: none;
+  height: 0.1rem;
+  background-color: var(--hh-color-light);
+  display: block;
+  margin: 5rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  hr {
+    margin: 7rem 0;
+  }
+}
+
+details > * {
+  box-sizing: border-box;
+}
+
+summary {
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+a {
+  font: var(--hh-font-body);
+  color: var(--hh-color-text);
+  text-decoration: none;
+}

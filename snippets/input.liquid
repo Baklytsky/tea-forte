@@ -1,0 +1,211 @@
+{%- case type -%}
+  {%- when 'text' -%}
+    <input
+      slot="input"
+      type="text"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      autocomplete="{{ autocomplete }}"
+      {% if input_class %}class="{{ input_class }}"{% endif %}
+      {% if required %}required aria-required="true"{% endif %}
+      {% if errors %}
+        autofocus
+        aria-invalid="true"
+        aria-describedby="{{ error_id }}"
+      {% endif %}
+      {% if success %}
+        aria-describedby="{{ success_id }}"
+      {% endif %}
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+    </label>
+  {%- when 'number' -%}
+    <input
+      slot="input"
+      type="number"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      {% if min  %}min="{{ min }}"{% endif %}
+      {% if max %}max="{{ max }}"{% endif %}
+      {% if input_class %}class="{{ input_class }}"{% endif %}
+      {% if required %}required aria-required="true"{% endif %}
+      {% if errors %}
+        autofocus
+        aria-invalid="true"
+        aria-describedby="{{ error_id }}"
+      {% endif %}
+      {% if success %}
+        aria-describedby="{{ success_id }}"
+      {% endif %}
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+    </label>
+  {%- when 'search' -%}
+    <span slot="icon">{%- render 'icon' with 'search' -%}</span>
+    <input
+      slot="input"
+      type="search"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      autocomplete="{{ autocomplete }}"
+      {% if input_class %}class="{{ input_class }}"{% endif %}
+      {% if required %}required aria-required="true"{% endif %}
+      {% if errors %}
+        autofocus
+        aria-invalid="true"
+        aria-describedby="{{ error_id }}"
+      {% endif %}
+      {% if success %}
+        aria-describedby="{{ success_id }}"
+      {% endif %}
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+    </label>
+  {%- when 'email' -%}
+    <input
+      slot="input"
+      type="email"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      autocomplete="email"
+      autocorrect="off"
+      autocapitalize="off"
+      {% if class %}class="{{ class }}"{% endif %}
+      {% if required %}required aria-require="true"{% endif %}
+      {% if errors %}
+        autofocus
+        aria-invalid="true"
+        aria-describedby="{{ error_id }}"
+      {% endif %}
+      {% if success %}
+        aria-describedby="{{ success_id }}"
+      {% endif %}
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+    </label>
+  {%- when 'password' -%}
+    <input
+      slot="input"
+      type="password"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      autocomplete="current-password"
+      {% if class %}class="{{ class }}"{% endif %}
+      {% if required %}required aria-require="true"{% endif %}
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+  </label>
+  {%- when 'tel' -%}
+    <input
+      slot="input"
+      type="tel"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      autocomplete="tel"
+      pattern="[0-9\-]*"
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+    </label>
+  {%- when 'textarea' -%}
+    <textarea
+      slot="input"
+      rows="10"
+      id="{{ id }}"
+      name="{{ name }}"
+      {% if attributes %}
+        {{ attributes }}
+      {% endif %}
+    >
+      {{- value -}}
+    </textarea>
+    <label
+      slot="label"
+      for="{{ id }}"
+      {% if label_class %}class="{{ label_class }}"{% endif %}
+    >
+      {{ label }}
+    </label>
+  {%- when 'custom-select' -%}
+    <hh-custom-select
+      name="{{ name }}"
+      active="{{ active }}"
+      options="{{ options | escape }}"
+      {% if lang %}lang="{{ lang }}"{% endif %}
+    >
+      <h2 class="p" slot="title">{{ label }}</h2>
+      <span slot="button">
+        {{ value }}
+      </span>
+      <span slot="icon">{% render 'icon' with 'caret' %}</span>
+      <input slot="input" type="hidden" name="{{ name }}" value="{{ active }}" />
+    </hh-custom-select>
+  {%- when 'select' -%}
+    <select
+      slot="input"
+      id="{{ id }}"
+      name="{{ name }}"
+      data-default="{{ value }}"
+      autocomplete="{{ autocomplete }}"
+    >
+      {{ options }}
+    </select>
+    <label slot="label" for="{{ id }}">{{ label }}</label>
+    <span slot="icon" style="width: 10px;">{%- render 'icon' with 'caret' -%}</span>
+  {%- when 'checkbox' -%}
+    <input slot="input" type="checkbox" id="{{ id }}" name="{{ name }}">
+    <label slot="label" for="{{ id }}">{{ label }}</label>
+{%- endcase -%}

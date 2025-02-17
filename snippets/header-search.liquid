@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="{{ 'snippet-header-search.css' | asset_url }}">
+
+<hh-details-modal label="{{ 'general.search.search' | t }}" class="hidden--sm">
+  <span slot="summary">
+    <hh-button theme="tertiary" href="#" tabindex="-1" >{{ 'general.search.search' | t }}</hh-button>
+  </span>
+  <div slot="details" class="container">
+    <form class="header-search__form" action="{{ routes.search_url }}" method="get" role="search">
+      <div class="field header-search__field">
+        <input class="header-search__input h4" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}...">
+        <input type="hidden" name="options[prefix]" value="last">
+        <button class="visually-hidden" tabindex="-1">
+          {{ 'general.search.search' | t }}
+        </button>
+      </div>
+      <label class="header-search__label" for="Search-In-Modal">Hit 'enter' to search</label>
+    </form>
+    <button data-close type="button" class="header-search__close" aria-label="{{ 'accessibility.close' | t }}">
+      {%- render 'icon' with 'search' -%}
+    </button>
+  </div>
+</hh-details-modal>

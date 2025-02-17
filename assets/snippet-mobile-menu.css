@@ -1,0 +1,142 @@
+@media screen and (min-width: 990px) {
+  .mobile-menu {
+    display: none;
+  }
+}
+
+.mobile-menu__container {
+  height: calc(100% - 40px);
+  padding-top: 20px;
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+}
+
+[is-open] .mobile-menu__container {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.closing .mobile-menu__container {
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.mobile-menu__submenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  background: var(--hh-modal-background);
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+details .mobile-menu__submenu,
+details[closing] .mobile-menu__submenu,
+details[open][closing] .mobile-menu__submenu {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: 0.3s transform, 0.3s opacity;
+}
+
+details[open] .mobile-menu__submenu {
+  opacity: 1;
+  transform: translateX(0);
+  transition: 0.3s transform, 0.3s opacity;
+}
+
+.mobile-menu__icon {
+  height: 39px;
+  width: 34px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu__icon > svg {
+  height: 39px;
+  width: 34px;
+  fill: none;
+  vertical-align: middle;
+}
+
+.mobile-menu__icon .icon-hamburger {
+  display: block;
+}
+
+[is-open] .mobile-menu__icon .icon-hamburger {
+  display: none;
+}
+
+.mobile-menu__icon .icon-close {
+  display: none;
+}
+
+[is-open] .mobile-menu__icon .icon-close {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+@media screen and (min-width: 990px) {
+  .mobile-menu__icon {
+    display: none;
+  }
+}
+
+.mobile-menu__navigation {
+  border-top: 1px solid var(--hh-color-grey-light);
+}
+
+.mobile-menu__menu-item {
+  padding: 2.1rem 3.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-menu__menu-item--logout {
+  color: var(--hh-color-blue-grey);
+  justify-content: flex-start;
+}
+
+.mobile-menu__menu-item,
+.mobile-menu__menu-item:focus:not(:focus-visible) {
+  border-bottom: 1px solid var(--hh-color-grey-light);
+}
+
+.mobile-menu__menu-item > svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.mobile-menu__menu-item--parent svg {
+  transform: rotate(-90deg);
+}
+
+.mobile-menu__menu-item--logout > svg {
+  width: 2.2rem;
+  margin-left: 1rem;
+}
+
+.mobile-menu__menu-item--back {
+  background: var(--hh-color-brand-secondary);
+  color: var(--hh-color-day);
+}
+
+.mobile-menu__menu-item--back svg {
+  transform: rotate(90deg);
+}
+
+.mobile-menu__utility-links .mobile-menu__menu-item {
+  border-bottom: 0;
+}

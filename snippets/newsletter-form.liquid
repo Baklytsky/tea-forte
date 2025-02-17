@@ -1,0 +1,38 @@
+{%- form 'customer' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  <div class="newsletter-form__wrapper relative">
+    <hh-input-wrapper class="newsletter-form__input-wrapper" theme="minimal" icon="left" animation="disappear" height="compact">
+      <span slot="icon" class="newsletter-form__icon">{% render 'icon' with 'envelope' %}</span>
+      {%- assign label = 'newsletter.label' | t -%}
+      {%- render 'input',
+        id: 'newsletter-form-input',
+        label: label,
+        type: 'email',
+        name: 'contact[email]',
+        value: form.email,
+        required: true,
+        errors: form.errors,
+        success: form.posted_successfully?
+      -%}
+    </hh-input-wrapper>
+
+    <button type="submit" class="newsletter-form__button relative c-day">
+      {% render 'icon' with 'caret' %}
+      <span class="visually-hidden">{{ 'newsletter.button_label' | t }}</span>
+    </button>
+  </div>
+
+  {%- if form.errors -%}
+    <small class="p newsletter-form__error" id="newsletter-form-error">
+      {% render 'icon' with 'error' %}
+      {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+    </small>
+  {%- endif -%}
+
+  {%- if form.posted_successfully? -%}
+    <small class="p newsletter-form__success" id="newsletter-form-success" tabindex="-1" autofocus>
+      {% render 'icon' with 'success' %}
+      {{ 'newsletter.success' | t }}
+    </small>
+  {%- endif -%}
+{%- endform -%}

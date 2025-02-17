@@ -1,0 +1,75 @@
+{% render 'async-stylesheet', url: 'snippet-variant-picker.css' %}
+
+{% if style == 'button' %}
+  <hh-variant-picker class="no-js-hidden block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+    {%- for option in product.options_with_values -%}
+        <fieldset class="js vp__input">
+          <legend class="pl0 mb025">{{ option.name }}</legend>
+          {%- for value in option.values -%}
+            <input type="radio" id="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}"
+                  name="{{ option.name }}"
+                  value="{{ value | escape }}"
+                  form="product-form-{{ section.id }}"
+                  {% if option.selected_value == value %}checked{% endif %}
+            >
+            <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}">
+              {{ value }}
+            </label>
+          {%- endfor -%}
+        </fieldset>
+    {%- endfor -%}
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </hh-variant-picker>
+{% else %}
+  <hh-variant-picker class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+    {%- for option in product.options_with_values -%}
+      <div class="vp__input vp__input--dropdown">
+        <label class="pl mb0 block" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+          {{ option.name }}
+        </label>
+        <div class="vp__input__select">
+          <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+            class="vp__input__select__select pointer "
+            name="options[{{ option.name | escape }}]"
+            form="product-form-{{ section.id }}"
+          >
+            {%- for value in option.values -%}
+              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                {{ value }}
+              </option>
+            {%- endfor -%}
+          </select>
+          {% render 'icon' with 'caret' %}
+        </div>
+      </div>
+    {%- endfor -%}
+
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </hh-variant-picker>
+{% endif %}
+
+<noscript>
+  <div class="vp__input{% if product.has_only_default_variant %} hidden{% endif %}">
+    <label class="pl0 mb025" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+    <div class="select">
+      <select name="id" id="Variants-{{ section.id }}" class="select__select" form="product-form">
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+            {% if variant.available == false %}disabled{% endif %}
+            value="{{ variant.id }}"
+          >
+            {{ variant.title }}
+            {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+            - {{ variant.price | money | strip_html }}
+          </option>
+        {%- endfor -%}
+      </select>
+      {% render 'icon' with 'caret' %}
+    </div>
+  </div>
+</noscript>

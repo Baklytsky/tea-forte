@@ -1,0 +1,78 @@
+{% liquid
+  render 'async-stylesheet', url: 'customer.css'
+  render 'async-stylesheet', url: 'snippet-account-forms.css'
+%}
+
+<script src="{{ '-component-tabs.min.js' | asset_url }}" type="module" defer></script>
+
+<div class="container">
+  <hh-tabs data-mobile-only="true">
+    <div class="account-forms__tablist js-tablist" role="tablist">
+      <button
+        id="login-tab"
+        type="button"
+        class="p uppercase account-tablist__item js-tab {% if active == 'login' %}active{% endif %}"
+        role="tab"
+        aria-selected="true"
+        aria-controls="login-panel"
+      >
+        {{- 'customer.log_in' | t -}}
+      </button>
+      <button
+        id="register-tab"
+        type="button"
+        class="p uppercase account-tablist__item js-tab {% if active == 'register' %}active{% endif %}"
+        role="tab" aria-selected="false"
+        aria-controls="register-panel"
+      >
+        {{- 'customer.sign_up' | t -}}
+      </button>
+    </div>
+    <div class="flex mb2">
+      <div id="login--background"></div>
+      <div
+        id="login-panel"
+        class="account-forms__tab js-tabpanel {% if active != 'login' %}hidden{% endif %}"
+        role="tabpanel"
+        aria-labelledby="login-tab"
+        tabindex="-1"
+      >
+        <div>
+          {% render 'login' %}
+          {% render 'recover' %}
+          {% render 'register' %}
+        </div>
+      </div>
+    </div>
+  </hh-tabs>
+</div>
+
+<script>
+    /*
+      Show/hide the recover password form when requested.
+    */
+    function showRecoverPasswordForm() {
+      document.getElementById('RecoverPasswordForm').style.display = 'block';
+      document.getElementById('CustomerLoginForm').style.display='none';
+    }
+
+    function hideRecoverPasswordForm() {
+      document.getElementById('RecoverPasswordForm').style.display = 'none';
+      document.getElementById('CustomerLoginForm').style.display = 'block';
+    }
+
+    function showRegisterForm() {
+      document.getElementById('RegisterForm').style.display = 'block';
+      document.getElementById('CustomerLoginForm').style.display='none';
+    }
+
+    function hideRegisterForm() {
+      document.getElementById('RegisterForm').style.display = 'none';
+      document.getElementById('CustomerLoginForm').style.display = 'block';
+    }  
+
+    // Allow deep linking to the recover password form
+    if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+
+    // reset_success is only true when the reset form is
+</script>
