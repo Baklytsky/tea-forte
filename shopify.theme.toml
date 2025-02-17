@@ -1,5 +1,5 @@
 [environments.dev]
-theme = "174793556242"
-store = "andrew-baklytsky.myshopify.com"
-password  = "shptka_718efbb98aa8a4b8db1d62dc24beeee9"
+theme = "176000500014"
+store = "tea-forte-wholesale-dev-2.myshopify.com"
+password  = "shptka_b4b08662ae2dbca5526aecadf3aa2e2a"
 #ignore = "sections/header.liquid"

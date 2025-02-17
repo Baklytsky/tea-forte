@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "scripts": {
+    "watch:esbuild": "node ./components/scripts/esbuild.js --watch",
+    "bundle:esbuild": "node ./components/scripts/esbuild.js",
+    "start:shopify": "shopify theme dev -e dev",
+    "watch": "concurrently \"npm run start:shopify\" \"npm run watch:esbuild\"",
+    "pull:settings": "shopify theme pull --only='config/*.json'  --only='sections/*.json'  --only='templates/*.json'",
+    "pull:updates": "shopify theme pull",
+    "deploy": "shopify theme push -e dev",
+    "login": "shopify theme open -s tea-forte-wholesale-dev-2.myshopify.com"
+  },
+  "dependencies": {
+    "@lit-labs/motion": "^1.0.3",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "lit": "^2.2.8"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.18.10",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@composi/gestures": "^1.0.9",
+    "esbuild": "^0.15.5",
+    "globby": "^13.1.2",
+    "node-watch": "^0.7.3",
+    "tiny-glob": "^0.2.9",
+    "concurrently": "^7.0.0"
+  }
+}
